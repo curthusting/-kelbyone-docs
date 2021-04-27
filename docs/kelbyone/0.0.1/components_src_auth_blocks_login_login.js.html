@@ -26,7 +26,7 @@
     
 
 
-    <title>providers/src/_providers.js</title>
+    <title>components/src/auth/blocks/login/login.js</title>
 
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -85,7 +85,7 @@
 
 <div id="main">
     
-    <h1 id='page-title' class="page-title">providers/src/_providers.js</h1>
+    <h1 id='page-title' class="page-title">components/src/auth/blocks/login/login.js</h1>
     
 
     
@@ -95,18 +95,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Auth } from './auth.provider'
-import { State } from './state.provider'
+            <pre class="prettyprint source linenums"><code>import { reactive, computed, ref } from 'vue';
 
+import FormInputComponent from '@/_shared/_partials/form-input/form-input.vue';
 /**
- * KelbyOne Providers
- * @namespace Providers
- * @author Curt Husting &lt;curthusting@gmail.com>
- */
-export const Providers = {
-  Auth,
-  State,
-}
+* Auth Login Module
+* @module Auth:_Login
+* @implements {@link Providers.Auth~login|Providers.Auth.login()}
+*/
+export default {
+  name: 'AuthLoginComponent',
+  components: { FormInputComponent },
+  setup() {
+    const state = reactive({
+      username: ref(null),
+      password: ref(null),
+      update: async (data) => {
+        const { key, value } = data;
+        state[key] = value;
+      },
+      canSubmit: computed(() => {
+        const { username, password } = state;
+        return Boolean(username &amp;&amp; password);
+      }),
+    });
+
+    return { state };
+  },
+  methods: {
+    login: async function () {
+      const { username, password } = this.state;
+      this.$emit('login', { username, password });
+    }
+  }
+};
 </code></pre>
         </article>
     </section>

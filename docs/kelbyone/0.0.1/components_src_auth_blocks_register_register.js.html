@@ -26,7 +26,7 @@
     
 
 
-    <title>providers/src/_providers.js</title>
+    <title>components/src/auth/blocks/register/register.js</title>
 
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -85,7 +85,7 @@
 
 <div id="main">
     
-    <h1 id='page-title' class="page-title">providers/src/_providers.js</h1>
+    <h1 id='page-title' class="page-title">components/src/auth/blocks/register/register.js</h1>
     
 
     
@@ -95,18 +95,51 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Auth } from './auth.provider'
-import { State } from './state.provider'
+            <pre class="prettyprint source linenums"><code>import { reactive, ref, computed } from 'vue';
 
+import FormInputComponent from '@/_shared/_partials/form-input/form-input.vue';
 /**
- * KelbyOne Providers
- * @namespace Providers
- * @author Curt Husting &lt;curthusting@gmail.com>
+ * Auth Register Module
+ * @module Auth:_Register
+ * @implements {@link Providers.Auth~register|Providers.Auth.register()}
  */
-export const Providers = {
-  Auth,
-  State,
-}
+
+export default {
+  name: 'AuthRegisterComponent',
+  components: { FormInputComponent },
+  setup() {
+    const state = reactive({
+      firstname: ref(null),
+      lastname: ref(null),
+      email: ref(null),
+      username: ref(null),
+      password: ref(null),
+      confirm: ref(null),
+      error: ref(null),
+      mismatch: ref(null),
+      canSubmit: computed(() => {
+        const { firstname, lastname, email, username, password, confirm } = state;
+        if (firstname &amp;&amp; lastname &amp;&amp; email &amp;&amp; username &amp;&amp; password &amp;&amp; confirm) {
+          return true;
+        }
+        return false;
+      }),
+    });
+
+    const update = async (data) => {
+      const { key, value } = data;
+      state[key] = value;
+    };
+
+    return { state, update };
+  },
+  methods: {
+    register: async function () {
+      const { firstname, lastname, email, username, password, confirm } = this.state;
+      this.$emit('register', { firstname, lastname, email, username, password, confirm });
+    }
+  }
+};
 </code></pre>
         </article>
     </section>

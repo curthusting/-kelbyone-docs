@@ -26,7 +26,7 @@
     
 
 
-    <title>providers/src/_providers.js</title>
+    <title>components/src/auth/views/login-register/login-register.js</title>
 
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -85,7 +85,7 @@
 
 <div id="main">
     
-    <h1 id='page-title' class="page-title">providers/src/_providers.js</h1>
+    <h1 id='page-title' class="page-title">components/src/auth/views/login-register/login-register.js</h1>
     
 
     
@@ -95,18 +95,36 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Auth } from './auth.provider'
-import { State } from './state.provider'
+            <pre class="prettyprint source linenums"><code>import { reactive } from 'vue';
 
+import { Api } from '@kelbyone/providers';
+
+import AuthLoginRegisterComponent from '@/auth/blocks/login-register/login-register.vue';
 /**
- * KelbyOne Providers
- * @namespace Providers
- * @author Curt Husting &lt;curthusting@gmail.com>
+ * Auth Login Register Module
+ * @module Auth:Login_Register
+ *
+ * @implements {@link Auth:_Login}
+ * @implements {@link Auth:_Register}
  */
-export const Providers = {
-  Auth,
-  State,
-}
+
+export default {
+  name: 'AuthLoginRegisterView',
+  components: { AuthLoginRegisterComponent },
+  setup() {
+    const state = reactive({});
+
+    return { state };
+  },
+  methods: {
+    login: async function (data) {
+      console.log('view login', data)
+    },
+    register: async function (data) {
+      console.log('view register', data)
+    }
+  }
+};
 </code></pre>
         </article>
     </section>

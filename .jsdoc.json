@@ -7,7 +7,6 @@
       "./_src/core/src",
       "./_src/providers/src",
       "./_src/services/src",
-      "./_src/interfaces",
       "package.json",
       "README.md"
     ],

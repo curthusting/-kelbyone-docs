@@ -1,0 +1,15 @@
+{
+  "name": "kelbyone",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-docs": "rm -rf _docs && jsdoc --configure .jsdoc.json --verbose"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "clean-jsdoc-theme": "^3.0.8"
+  }
+}

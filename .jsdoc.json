@@ -1,0 +1,36 @@
+{
+  "recurseDepth": 10,
+  "source": {
+    "include": [
+      "./_src/applications.js",
+      "./_src/components/src",
+      "./_src/core/src",
+      "./_src/providers/src",
+      "./_src/services/src",
+      "./_src/interfaces",
+      "package.json",
+      "README.md"
+    ],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "opts": {
+    "encoding": "utf8",
+    "readme": "./README.md",
+    "destination": "./_docs/",
+    "recurse": true,
+    "verbose": true,
+    "template": "./node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "theme": "light",
+      "create_style": ".accordion {padding-left: 15px} .param-type dd {font-family: 'body', font-size: 100%}"
+    }
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}

@@ -28,7 +28,7 @@
 
 
     <title>
-      Response
+      components/auth/views/login-register/login-register.js
     </title>
 
     <!--[if lt IE 9]>
@@ -85,7 +85,7 @@
   <body>
 
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="2616927" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Auth_Login_Register.html">Auth:Login_Register</a></li></ul> </div><div class="accordion collapsed" id="8114684" > <h3 class="accordion-heading">Namespaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=1615871><div class="accordion-heading child"><a href="Providers.Auth.html">Auth</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Providers.Auth.html#loadUser">loadUser</a></li><li data-type='method'><a href="Providers.Auth.html#login">login</a></li><li data-type='method'><a href="Providers.Auth.html#register">register</a></li><li data-type='method'><a href="Providers.Auth.html#setUser">setUser</a></li></ul></li><li class="accordion collapsed child" id=752566><div class="accordion-heading child"><a href="Providers.Customer.html">Customer</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Providers.Customer.html#loadCustomer">loadCustomer</a></li><li data-type='method'><a href="Providers.Customer.html#setCustomer">setCustomer</a></li></ul></li><li class="accordion collapsed child" id=3079975><div class="accordion-heading child"><a href="Services.Api.html">Api</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Services.Api.html#delete">delete</a></li><li data-type='method'><a href="Services.Api.html#fetch">fetch</a></li><li data-type='method'><a href="Services.Api.html#get">get</a></li><li data-type='method'><a href="Services.Api.html#patch">patch</a></li><li data-type='method'><a href="Services.Api.html#post">post</a></li></ul></li></ul> </div><div class="accordion collapsed" id="4709590" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li></ul> </div></div>
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="9477875" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Auth_Login_Register.html">Auth:Login_Register</a></li></ul> </div><div class="accordion collapsed" id="9748486" > <h3 class="accordion-heading">Namespaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=2119061><div class="accordion-heading child"><a href="Providers.Auth.html">Auth</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Providers.Auth.html#loadUser">loadUser</a></li><li data-type='method'><a href="Providers.Auth.html#login">login</a></li><li data-type='method'><a href="Providers.Auth.html#register">register</a></li><li data-type='method'><a href="Providers.Auth.html#setUser">setUser</a></li></ul></li><li class="accordion collapsed child" id=8224727><div class="accordion-heading child"><a href="Providers.Customer.html">Customer</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Providers.Customer.html#loadCustomer">loadCustomer</a></li><li data-type='method'><a href="Providers.Customer.html#setCustomer">setCustomer</a></li></ul></li><li class="accordion collapsed child" id=3918260><div class="accordion-heading child"><a href="Services.Api.html">Api</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Services.Api.html#delete">delete</a></li><li data-type='method'><a href="Services.Api.html#fetch">fetch</a></li><li data-type='method'><a href="Services.Api.html#get">get</a></li><li data-type='method'><a href="Services.Api.html#patch">patch</a></li><li data-type='method'><a href="Services.Api.html#post">post</a></li></ul></li></ul> </div><div class="accordion collapsed" id="1101388" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li></ul> </div></div>
       
 
     </nav>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Response
+        components/auth/views/login-register/login-register.js
       </h1>
       
 
@@ -108,181 +108,126 @@
 
 
 
-
-<section>
-
-
-<header>
     
-        
-        <h2>
-        
-        Response
-        
-        </h2>
-        
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { reactive, inject, ref, computed } from 'vue';
 
+import AuthLoginRegisterComponent from '@/components/auth/blocks/login-register/login-register.vue';
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Represents the Response Object Structure.</p></div>
-        
+/**
+ * Auth Login Register View
+ * @module Auth:Login_Register
+ *
+ * @implements {@link Providers.Auth#login|Providers.Auth.login()}
+ * @implements {@link Providers.Auth#register|Providers.Auth.register()}
+ *
+ * @listens login
+ * @listens register
+ *
+ * @example
+ * koc("loadComponent", {
+ *   name: "auth-login-register-view",
+ *   el: "#kelbyone-component-view",
+ *   props: {
+ *     user: { id: "139156", token: "608aa6570998c2.70441750" } }
+ *   }
+ * });
+ */
 
-        
+export default {
+  name: 'AuthLoginRegisterView',
+  props: {
+    config: {
+      type: Object,
+      required: false,
+      default: null,
+    },
+    user: {
+      type: Object,
+      required: false,
+      default: null,
+    },
+  },
+  components: {
+    AuthLoginRegisterComponent,
+  },
+  setup() {
+    const props = inject('props');
+    let config = inject('config');
 
+    config = { ...config, ...props.config };
 
+    console.log('config', config);
 
-    <h5 class="subsection-title">Properties</h5>
+    const authProvider = inject('authProvider');
 
-    
-<div class="allow-overflow">
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
+    const state = reactive({
+      isExpanded: ref(false),
+      showNotification: ref(false),
+      notification: ref(null),
+      user: computed(() => authProvider().getUser),
+      isLoadingUser: computed(() => authProvider().isLoading),
+    });
 
-        <th>Type</th>
+    const handleResponse = async (response) => {
+      if (response.status === 'error') {
+        state.showNotification = true;
+        state.notification = response.data.message || response.data.data;
+      } else {
+        state.showNotification = true;
+        state.notification = 'Success!';
+        state.showNotification = false;
+        state.notification = null;
+      }
+    };
 
-        
+    const load = async (user) => {
+      state.showNotification = true;
+      state.notification = 'Loading User...';
 
-        
+      const { id, token } = user;
 
-        <th class="last">Description</th>
-    </tr>
-    </thead>
+      const response = await authProvider().loadUser(id, token, config);
+      await handleResponse(response);
+      state.isExpanded = true;
+    };
 
-    <tbody>
-    
+    if (props.user) {
+      load(props.user);
+    } else {
+      state.isExpanded = true;
+    }
 
-        <tr>
-            
-                <td class="name"><code>status</code></td>
-            
+    const login = async (data) => {
+      state.showNotification = true;
+      state.notification = 'Validating Credentials...';
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+      const { username, password } = data;
 
+      const response = await authProvider().login(username, password, config);
+      handleResponse(response);
+    };
 
-            
-            </td>
+    const register = async (data) => {
+      state.showNotification = true;
+      state.notification = 'Creating Account...';
 
-            
+      const { firstname, lastname, email, username, password, confirm } = data;
 
-            
+      const response = await authProvider().register(firstname, lastname, email, username, password, confirm, config);
+      handleResponse(response);
+    };
 
-            <td class="description last"></td>
-        </tr>
+    const clearNotification = (async) => state.showNotification = false;
+    const toggleExpanded = (async) => state.isExpanded = !state.isExpanded;
 
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services__interfaces.js.html">services/_interfaces.js</a>, <a href="services__interfaces.js.html#line1">line 1</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    return { login, register, clearNotification, toggleExpanded, state };
+  },
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

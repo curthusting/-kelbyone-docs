@@ -28,7 +28,7 @@
 
 
     <title>
-      Auth:Login_Register
+      services/_interfaces.js
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Auth:Login_Register
+        services/_interfaces.js
       </h1>
       
 
@@ -108,122 +108,35 @@
 
 
 
-
-<section>
-
-
-<header>
     
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Represents the Response Object Structure.
+ *
+ * @interface Response
+ * @property { string } status
+ * @property { object } data
+ */
 
+/**
+ * Represents the Config Object Structure.
+ *
+ * @interface Config
+ * @property { Config.Api } api
+ * @property { Boolean } debug
+ */
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Auth Login Register View</p></div>
-        
-
-        
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="implements">Implements:</dt>
-            <dd class="implements"><ul>
-                
-                    <li><a href="Providers.Auth.html#login">Providers.Auth.login()</a></li>
-                
-                    <li><a href="Providers.Auth.html#register">Providers.Auth.register()</a></li>
-                
-            </ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="components_auth_views_login-register_login-register.js.html">components/auth/views/login-register/login-register.js</a>, <a href="components_auth_views_login-register_login-register.js.html#line5">line 5</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-        
-            <h3>Example</h3>
-            
-    <div class="rel">
-    <pre class="prettyprint"><code>koc("loadComponent", {
-  name: "auth-login-register-view",
-  el: "#kelbyone-component-view",
-  props: {
-    user: { id: "139156", token: "608aa6570998c2.70441750" } }
-  }
-});</code></pre>
-    
-    
-    </div>
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+/**
+ * Represents the Config Object Structure.
+ *
+ * @interface Config.Api
+ * @property { string } uri
+ * @property { string } version
+ */
+</code></pre>
+        </article>
+    </section>
 
 
 

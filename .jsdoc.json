@@ -4,13 +4,10 @@
     "include": [
       "./_src/applications.js",
       "./_src/components/src",
-      "./_src/core/src",
-      "./_src/providers/src",
-      "./_src/services/src",
       "package.json",
       "README.md"
     ],
-    "includePattern": ".js$",
+    "includePattern": ".(js)$",
     "excludePattern": "(node_modules/|docs)"
   },
   "plugins": [

@@ -28,7 +28,7 @@
 
 
     <title>
-      Api
+      Customer
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Api
+        Customer
       </h1>
       
 
@@ -117,7 +117,7 @@
         
         <h2>
         
-        Api
+        Customer
         
         </h2>
         
@@ -130,10 +130,305 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>KelbyOne Api Service</p></div>
+            <div class="description"><p>KelbyOne Customer Provider</p></div>
         
 
         
+
+
+
+    <h5 class="subsection-title">Properties</h5>
+
+    
+<div class="allow-overflow">
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>isLoading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>General loading state.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isCreating</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>General creating state.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isUpdating</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>General updating state.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>getCustomer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Returns the state of the customer.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hasCustomer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Returns whether a customer exists.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>getCustomerProfiles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Returns the state of the customer payment profiles.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hasCustomerProfiles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Returns whether a customer has payment profiles.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>getCustomerSubscriptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Returns the state of the customer subscriptions.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hasCustomerSubscriptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Returns whether a customer has subscriptions.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>getCustomerMembership</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Returns the state of the customer membership.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hasCustomerMembership</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Returns whether a customer has a KelbyOne membership.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+
 
 
 
@@ -168,7 +463,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services_api.service.js.html">services/api.service.js</a>, <a href="services_api.service.js.html#line1">line 1</a>
+                <a href="providers_customer.provider.js.html">providers/customer.provider.js</a>, <a href="providers_customer.provider.js.html#line67">line 67</a>
             </li></ul></dd>
         </div>
     
@@ -207,13 +502,13 @@
 
     
 
-    <h4 class="name" id="delete">
-        <a href="#delete">#</a>
-        <span class="type-signature">(async) </span>delete<span class="signature">(url)</span><span class="type-signature"> &rarr; {<a href="Response.html">Response</a>}</span>
+    <h4 class="name" id="loadCustomer">
+        <a href="#loadCustomer">#</a>
+        <span class="type-signature">(async) </span>loadCustomer<span class="signature">(id, token, config)</span><span class="type-signature"> &rarr; {<a href="Response.html">Response</a>}</span>
     </h4>
 
     
-        <p class="summary"><p>Does a DELETE call to the provided URL with the provided DATA.</p></p>
+        <p class="summary"><p>Attempts to load a customer with the provided id and token.</p></p>
     
 
 
@@ -252,7 +547,7 @@
 
         <tr>
             
-                <td class="name"><code>url</code></td>
+                <td class="name"><code>id</code></td>
             
 
             <td class="type">
@@ -268,7 +563,53 @@
 
             
 
-            <td class="description last"><p>The URL you want to send a DELETE request to.</p></td>
+            <td class="description last"><p>The customer id.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The token.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Config.html">Config</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The component configuration.</p></td>
         </tr>
 
     
@@ -296,6 +637,15 @@
     
 
     
+        <div class="details-item-container">
+            <dt class="implements">Implements:</dt>
+            <dd class="implements"><ul>
+                
+                    <li><a href="Services.Api.html#fetch">Services.Api.fetch()</a></li>
+                
+            </ul></dd>
+        </div>
+    
 
     
 
@@ -313,7 +663,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services_api.service.js.html">services/api.service.js</a>, <a href="services_api.service.js.html#line154">line 154</a>
+                <a href="providers_customer.provider.js.html">providers/customer.provider.js</a>, <a href="providers_customer.provider.js.html#line36">line 36</a>
             </li></ul></dd>
         </div>
     
@@ -386,13 +736,13 @@
 
     
 
-    <h4 class="name" id="fetch">
-        <a href="#fetch">#</a>
-        <span class="type-signature">(async) </span>fetch<span class="signature">(url, headers)</span><span class="type-signature"> &rarr; {<a href="Response.html">Response</a>}</span>
+    <h4 class="name" id="setCustomer">
+        <a href="#setCustomer">#</a>
+        <span class="type-signature"></span>setCustomer<span class="signature">(customer)</span><span class="type-signature"> &rarr; {void}</span>
     </h4>
 
     
-        <p class="summary"><p>Does a standard FETCH call to the provided URL.</p></p>
+        <p class="summary"><p>Sets the customer state as the provided object.</p></p>
     
 
 
@@ -431,30 +781,7 @@
 
         <tr>
             
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The URL you want to send a GET request to.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
+                <td class="name"><code>customer</code></td>
             
 
             <td class="type">
@@ -470,7 +797,7 @@
 
             
 
-            <td class="description last"><p>The HEADERS for the request. Will default to {'Accept': 'application/json', 'Content-Type': 'application/json'} if none are sent.</p></td>
+            <td class="description last"><p>The customer object.</p></td>
         </tr>
 
     
@@ -515,7 +842,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services_api.service.js.html">services/api.service.js</a>, <a href="services_api.service.js.html#line20">line 20</a>
+                <a href="providers_customer.provider.js.html">providers/customer.provider.js</a>, <a href="providers_customer.provider.js.html#line21">line 21</a>
             </li></ul></dd>
         </div>
     
@@ -539,24 +866,6 @@
 
 
 
-    <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
-    
-        
-
-    <div class="param-desc">
-    
-        
-<span class="param-type">Error</span>
-
-
-    
-    </div>
-
-
-    
-    </div>
-
 
 
     <div class="method-member-container mt-20">
@@ -571,659 +880,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="Response.html">Response</a></span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="get">
-        <a href="#get">#</a>
-        <span class="type-signature">(async) </span>get<span class="signature">(url, headers)</span><span class="type-signature"> &rarr; {<a href="Response.html">Response</a>}</span>
-    </h4>
-
-    
-        <p class="summary"><p>Does a GET call to the provided URL.</p></p>
-    
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The URL you want to send a GET request to.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The HEADERS for the request. Will default to {'Accept': 'application/json', 'Content-Type': 'application/json'} if none are sent.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    </div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services_api.service.js.html">services/api.service.js</a>, <a href="services_api.service.js.html#line46">line 46</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
-    
-        
-
-    <div class="param-desc">
-    
-        
-<span class="param-type">Error</span>
-
-
-    
-    </div>
-
-
-    
-    </div>
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Response.html">Response</a></span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="patch">
-        <a href="#patch">#</a>
-        <span class="type-signature">(async) </span>patch<span class="signature">(url, body, headers)</span><span class="type-signature"> &rarr; {<a href="Response.html">Response</a>}</span>
-    </h4>
-
-    
-        <p class="summary"><p>Does a PATCH call to the provided URL with the provided BODY.</p></p>
-    
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The URL you want to send a PATCH request to.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The BODY you want to PATCH.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The HEADERS for the request. Will default to {'Accept': 'application/json', 'Content-Type': 'application/json'} if none are sent.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    </div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services_api.service.js.html">services/api.service.js</a>, <a href="services_api.service.js.html#line120">line 120</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
-    
-        
-
-    <div class="param-desc">
-    
-        
-<span class="param-type">Error</span>
-
-
-    
-    </div>
-
-
-    
-    </div>
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Response.html">Response</a></span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="post">
-        <a href="#post">#</a>
-        <span class="type-signature">(async) </span>post<span class="signature">(url, body, headers)</span><span class="type-signature"> &rarr; {<a href="Response.html">Response</a>}</span>
-    </h4>
-
-    
-        <p class="summary"><p>Does a POST call to the provided URL with the provided BODY.</p></p>
-    
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The URL you want to send a POST request to.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The BODY you want to POST.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The HEADERS for the request. Will default to {'Accept': 'application/json', 'Content-Type': 'application/json'} if none are sent.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    </div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services_api.service.js.html">services/api.service.js</a>, <a href="services_api.service.js.html#line79">line 79</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
-    
-        
-
-    <div class="param-desc">
-    
-        
-<span class="param-type">Error</span>
-
-
-    
-    </div>
-
-
-    
-    </div>
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Response.html">Response</a></span>
+<span class="param-type">void</span>
 
 
     </dd>

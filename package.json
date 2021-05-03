@@ -11,5 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "clean-jsdoc-theme": "^3.0.8"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.6",
+    "jsdoc-vuejs": "^3.0.9",
+    "vue-template-compiler": "^2.5.21"
   }
 }

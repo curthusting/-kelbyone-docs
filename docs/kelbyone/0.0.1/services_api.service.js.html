@@ -28,7 +28,7 @@
 
 
     <title>
-      Auth:Login_Register
+      services/api.service.js
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Auth:Login_Register
+        services/api.service.js
       </h1>
       
 
@@ -108,122 +108,181 @@
 
 
 
-
-<section>
-
-
-<header>
     
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * KelbyOne Api Service
+ * @namespace Services.Api
+ * @summary KelbyOne Api Service
+ */
 
+const send = async (url, method, headers = {}, body) => fetch(url, { method, headers, body });
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Auth Login Register View</p></div>
-        
+export const Api = {
+  /**
+   * @memberof Services.Api
+   * @instance
+   * @summary Does a standard FETCH call to the provided URL.
+   * @param { string } url - The URL you want to send a GET request to.
+   * @param { object } headers - The HEADERS for the request. Will default to {'Accept': 'application/json', 'Content-Type': 'application/json'} if none are sent.
+   * @async
+   * @returns { Response }
+   * @throws { Error }
+   */
+  fetch: async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
 
-        
+    if ((response.status !== 200 &amp;&amp; response.status !== 201) || response.success === false) {
+      return {
+        status: 'error',
+        data,
+      };
+    }
+    return {
+      status: 'success',
+      data,
+    };
+  },
 
+  /**
+   * @memberof Services.Api
+   * @instance
+   * @summary Does a GET call to the provided URL.
+   * @param { string } url - The URL you want to send a GET request to.
+   * @param { object } headers - The HEADERS for the request. Will default to {'Accept': 'application/json', 'Content-Type': 'application/json'} if none are sent.
+   * @async
+   * @returns { Response }
+   * @throws { Error }
+   */
+  get: async (url, headers = null) => {
+    if (!headers) {
+      const headers = new Headers();
 
+      headers.append('Accept', 'application/json');
+      headers.append('Content-Type', 'application/json');
+    }
+    const response = await send(url, 'GET', headers);
+    const data = await response.json();
 
+    if (response.status !== 200) {
+      return {
+        status: 'error',
+        data,
+      };
+    }
+    return {
+      status: 'success',
+      data,
+    };
+  },
 
-<dl class="details">
+  /**
+   * @memberof Services.Api
+   * @instance
+   * @summary Does a POST call to the provided URL with the provided BODY.
+   * @param { string } url - The URL you want to send a POST request to.
+   * @param { object } body - The BODY you want to POST.
+   * @param { object } headers - The HEADERS for the request. Will default to {'Accept': 'application/json', 'Content-Type': 'application/json'} if none are sent.
+   * @async
+   * @returns { Response }
+   * @throws { Error }
+   */
+  post: async (url, body, headers = null) => {
+    if (!headers) {
+      const headers = new Headers();
 
-    
+      headers.append('Accept', 'application/json');
+      headers.append('Content-Type', 'application/json');
+    }
+    console.log('post', url, body, headers);
+    // try {
+    const response = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
+    const data = await response.json();
 
-    
+    if (data.data.redirect &amp;&amp; data.data.redirect.url) return window.location.replace(data.data.redirect.url);
 
-    
+    if ((response.status !== 200 &amp;&amp; response.status !== 201) || response.success === false) {
+      return {
+        status: 'error',
+        data,
+      };
+    }
+    return {
+      status: 'success',
+      data,
+    };
 
-    
+    // } catch (error) {
+    //   throw new Error('Unable to send POST request', error)
+    // }
+  },
 
-    
+  /**
+   * @memberof Services.Api
+   * @instance
+   * @summary Does a PATCH call to the provided URL with the provided BODY.
+   * @param { string } url - The URL you want to send a PATCH request to.
+   * @param { object } body - The BODY you want to PATCH.
+   * @param { object } headers - The HEADERS for the request. Will default to {'Accept': 'application/json', 'Content-Type': 'application/json'} if none are sent.
+   * @async
+   * @returns { Response }
+   * @throws { Error }
+   */
+  patch: async (url, body, headers = null) => {
+    if (!headers) {
+      const headers = new Headers();
 
-    
-        <div class="details-item-container">
-            <dt class="implements">Implements:</dt>
-            <dd class="implements"><ul>
-                
-                    <li><a href="Providers.Auth.html#login">Providers.Auth.login()</a></li>
-                
-                    <li><a href="Providers.Auth.html#register">Providers.Auth.register()</a></li>
-                
-            </ul></dd>
-        </div>
-    
+      headers.append('Accept', 'application/json');
+      headers.append('Content-Type', 'application/json');
+    }
 
-    
+    const response = await send(url, 'PATCH', headers, JSON.stringify(body));
+    const data = await response.json();
 
-    
+    if (data.data.redirect &amp;&amp; data.data.redirect.url) return window.location.replace(data.data.redirect.url);
 
-    
+    if ((response.status !== 200 &amp;&amp; response.status !== 201) || response.success === false) {
+      return {
+        status: 'error',
+        data,
+      };
+    }
+    return {
+      status: 'success',
+      data,
+    };
+  },
 
-    
+  /**
+   * @memberof Services.Api
+   * @instance
+   * @summary Does a DELETE call to the provided URL with the provided DATA.
+   * @param { string } url - The URL you want to send a DELETE request to.
+   * @async
+   * @returns { Response }
+   * @throws { Error }
+   */
+  delete: async (url) => {
+    const response = await send(url, 'DELETE');
+    const data = await response.json();
 
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="components_auth_views_login-register_login-register.js.html">components/auth/views/login-register/login-register.js</a>, <a href="components_auth_views_login-register_login-register.js.html#line5">line 5</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-        
-            <h3>Example</h3>
-            
-    <div class="rel">
-    <pre class="prettyprint"><code>koc("loadComponent", {
-  name: "auth-login-register-view",
-  el: "#kelbyone-component-view",
-  props: {
-    user: { id: "139156", token: "608aa6570998c2.70441750" } }
-  }
-});</code></pre>
-    
-    
-    </div>
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    if (response.status !== 200) {
+      return {
+        status: 'error',
+        data,
+      };
+    }
+    return {
+      status: 'success',
+      data,
+    };
+  },
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

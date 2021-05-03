@@ -28,7 +28,7 @@
 
 
     <title>
-      Auth:Login_Register
+      providers/customer.provider.js
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Auth:Login_Register
+        providers/customer.provider.js
       </h1>
       
 
@@ -108,122 +108,116 @@
 
 
 
-
-<section>
-
-
-<header>
     
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  reactive, computed, ref, readonly,
+} from 'vue';
 
+import { Api } from '@/services/api.service';
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Auth Login Register View</p></div>
-        
+const state = reactive({
+  customer: ref(null),
+  isLoading: ref(false),
+  isCreating: ref(false),
+  isUpdating: ref(false),
+});
 
-        
+/**
+ * @memberof Providers.Customer
+ * @instance
+ * @summary Sets the customer state as the provided object.
+ * @param { object } customer - The customer object.
+ * @returns { void }
+ */
+const setCustomer = (customer = {}) => {
+  state.customer = customer;
+};
 
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="implements">Implements:</dt>
-            <dd class="implements"><ul>
-                
-                    <li><a href="Providers.Auth.html#login">Providers.Auth.login()</a></li>
-                
-                    <li><a href="Providers.Auth.html#register">Providers.Auth.register()</a></li>
-                
-            </ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="components_auth_views_login-register_login-register.js.html">components/auth/views/login-register/login-register.js</a>, <a href="components_auth_views_login-register_login-register.js.html#line5">line 5</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-        
-            <h3>Example</h3>
-            
-    <div class="rel">
-    <pre class="prettyprint"><code>koc("loadComponent", {
-  name: "auth-login-register-view",
-  el: "#kelbyone-component-view",
-  props: {
-    user: { id: "139156", token: "608aa6570998c2.70441750" } }
+/**
+ * @memberof Providers.Customer
+ * @instance
+ * @summary Attempts to load a customer with the provided id and token.
+ * @param { string } id - The customer id.
+ * @param { string } token - The token.
+ * @param { Config } config - The component configuration.
+ * @implements {@link Services.Api#fetch|Services.Api.fetch()}
+ * @returns { Response }
+ * @throws { Error }
+ */
+const loadCustomer = async (id, token, config) => {
+  if (config.debug) {
+    console.log('Providers.Customer:loadCustomer():submitted data', { user, config });
   }
-});</code></pre>
-    
-    
-    </div>
+  if (!config.api.uri) {
+    return Error('Providers.Customer:loadCustomer() | Api config is required to retreive customer information.');
+  }
+  if (!token) {
+    return Error('Providers.Customer:loadCustomer() | User token is required.');
+  }
+  if (!id) {
+    return Error('Providers.Customer:loadCustomer() | Customer id is required.');
+  }
 
-        
-    
-    </div>
+  state.isLoading = true;
+  const url = `${config.api.uri}/${config.api.version}/customers/${id}?token=${token}&amp;now=${Date.now()}`;
+  const response = await Api.fetch(url);
+  state.isLoading = false;
 
-    
+  if (config.debug) {
+    console.log('Providers.Customer:loadCustomer():response data', response);
+  }
 
-    
+  if (response.status === 'error') {
+    setCustomer(null);
+    return response;
+  }
+  setCustomer(response.data);
+  return response;
+};
 
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+/**
+ * KelbyOne Customer Provider
+ * @namespace Providers.Customer
+ * @summary KelbyOne Customer Provider
+ * @property { Boolean } isLoading General loading state.
+ * @property { Boolean } isCreating General creating state.
+ * @property { Boolean } isUpdating General updating state.
+ * @property { Object | null } getCustomer Returns the state of the customer.
+ * @property { Boolean } hasCustomer Returns whether a customer exists.
+ * @property { Object | null } getCustomerProfiles Returns the state of the customer payment profiles.
+ * @property { Boolean } hasCustomerProfiles Returns whether a customer has payment profiles.
+ * @property { Object | null } getCustomerSubscriptions Returns the state of the customer subscriptions.
+ * @property { Boolean } hasCustomerSubscriptions Returns whether a customer has subscriptions.
+ * @property { Object | null } getCustomerMembership Returns the state of the customer membership.
+ * @property { Boolean } hasCustomerMembership Returns whether a customer has a KelbyOne membership.
+ */
+export default function CustomerProvider() {
+  return readonly({
+    loadCustomer,
+    setCustomer,
+    // General
+    isLoading: computed(() => Boolean(state.isLoading)),
+    isCreating: computed(() => Boolean(state.isCreating)),
+    isUpdating: computed(() => Boolean(state.isUpdating)),
+    // Customer
+    getCustomer: computed(() => state.customer),
+    hasCustomer: computed(() => Boolean(state.customer)),
+    // Profiles
+    getCustomerProfiles: computed(() => state.customer.profiles),
+    hasCustomerProfiles: computed(() => Boolean(state.customer &amp;&amp; state.customer.profiles &amp;&amp; state.customer.profiles.length)),
+    // Subscriptions
+    getCustomerSubscriptions: computed(() => state.customer.subscriptions),
+    hasCustomerSubscriptions: computed(() => Boolean(state.customer &amp;&amp; state.customer.subscriptions &amp;&amp; state.customer.subscriptions.length)),
+    // Membership
+    getCustomerMembership: computed(() => state.customer.subscriptions.filter((subscription) => subscription.type === 'membership')[0]),
+    hasCustomerMembership: computed(() => Boolean(state.customer &amp;&amp; state.customer.subscriptions &amp;&amp; state.customer.subscriptions.filter((subscription) => subscription.type === 'membership').length)),
+  });
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

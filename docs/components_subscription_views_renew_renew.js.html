@@ -28,7 +28,7 @@
 
 
     <title>
-      Home
+      components/subscription/views/renew/renew.js
     </title>
 
     <!--[if lt IE 9]>
@@ -99,29 +99,41 @@
 
     <div id="main" class="main-content">
       
+      <h1 id='page-title' class="page-title">
+        components/subscription/views/renew/renew.js
+      </h1>
+      
 
       
 
 
 
     
-
-
-
-
-
-
-
-
-
-    
-
-
-    <section class="readme">
-        <article><h1>KelbyOne Components Library</h1></article>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Subscription Renew View
+ * @module Subscription:Renew
+ *
+ * @prop { Config } config Component configuration
+ * @prop { Products } products Product details
+ * @prop { User } user Authenticated user details
+ *
+ *
+ * @example
+  koc("loadComponent", {
+    name: "subscription-renew-view",
+    el: "#kelbyone-component-view",
+    props: {
+      config: { ... },
+      products: { options: [{ ... }], selected: ... },
+      user: { ... },
+    }
+  });
+ *
+ */</code></pre>
+        </article>
     </section>
-
-
 
 
 

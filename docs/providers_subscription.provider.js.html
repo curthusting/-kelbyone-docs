@@ -28,7 +28,7 @@
 
 
     <title>
-      providers/auth.provider.js
+      providers/subscription.provider.js
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        providers/auth.provider.js
+        providers/subscription.provider.js
       </h1>
       
 
@@ -118,158 +118,257 @@
 import { Api } from '@/services/api.service';
 
 const state = reactive({
-  user: ref(null),
+  product: ref(null),
+  profile: ref(null),
+  coupon: ref(null),
+  customer: ref(null),
+  token: ref(null),
+  membership: ref(null),
+  recipient: ref(null),
   isLoading: ref(false),
   isCreating: ref(false),
-  isUpdating: ref(false)
+  isUpdating: ref(false),
 });
 
 /**
- * @memberof Providers.Auth
+ * @memberof Providers.Subscription
  * @instance
- * @summary Sets the user state as the provided object.
- * @param { object } user - The user object.
- * @returns { void } 
+ * @summary Sets the subscription product state as the provided string.
+ * @param { string } product - The product handle string.
+ * @returns { void }
  */
-const setUser = (user = {}) => {
-  state.user = user;
+const set = (key, value) => {
+  state[key] = value;
 };
 
 /**
- * @memberof Providers.Auth
+ * @memberof Providers.Subscription
  * @instance
- * @summary Attempts to login a user with the given username and password.
- * @param { string } username - The username.
- * @param { string } password - The password.
+ * @summary Updates the subscription product state as the provided string.
+ * @param { string } product - The product handle string.
+ * @param { Object } options - The available product options.
  * @param { Config } config - The component configuration.
- * @implements {@link Services.Api#get|Services.Api.get()}
- * @returns { Response } 
- * @throws { Error }
+ * @returns { Response }
  */
-const login = async (username, password, config = {}) => {
+const updateProduct = async (product, options, config) => {
   if (config.debug) {
-    console.log('Providers.Auth:login()', { username, password, config });
+    console.log('Providers.Subscription:updateProduct():submitted data', { product, options, config });
+  }
+  const previous = state.product
+
+  await set('product', product);
+
+  const response = await updatePreview(config, options)
+
+  if ('error' === response.status) {
+    await set('product', previous);
+    return response
+  }
+  set('preview', response.data.data);
+  return response
+};
+
+/**
+ * @memberof Providers.Subscription
+ * @instance
+ * @summary Updates the subscription coupon state as the provided string.
+ * @param { string } coupon - The promotion coupon string.
+ * @param { Config } config - The component configuration.
+ * @returns { Response }
+ */
+const updateCoupon = async (coupon, config) => {
+  if (config.debug) {
+    console.log('Providers.Subscription:updateProduct():submitted data', { coupon, config });
+  }
+  await set('coupon', coupon);
+
+  const response = await updatePreview(config, options)
+
+  if ('error' === response.status) {
+    await set('coupon', null);
+    return response
+  }
+  set('preview', response.data.data);
+  return response
+};
+
+/**
+ * @memberof Providers.Subscription
+ * @instance
+ * @summary Updates the subscription payment profile state as the provided string.
+ * @param { string } customer - The customer id.
+ * @param { Config } config - The component configuration.
+ * @returns { Response }
+ */
+const updateCustomer = async (customer, token, config) => {
+  if (config.debug) {
+    console.log('Providers.Subscription:updateCustomer():submitted data', { customer, token, config });
+  }
+  const previous = state.customer
+
+  await set('customer', customer);
+  await set('token', token);
+
+  const response = await updatePreview(config)
+
+  if ('error' === response.status) {
+    // await set('product', previous);
+    return response
+  }
+  set('preview', response.data.data);
+  return response
+};
+
+/**
+ * @memberof Providers.Subscription
+ * @instance
+ * @summary Updates the subscription state as the provided string.
+ * @param { string } subscription - The subscription id.
+ * @param { Config } config - The component configuration.
+ * @returns { Response }
+ */
+const updateMembership = async (membership, config) => {
+  if (config.debug) {
+    console.log('Providers.Subscription:updateMembership():submitted data', { membership, config });
+  }
+  const previous = state.membership
+
+  await set('membership', membership);
+
+  const response = await updatePreview(config)
+
+  if ('error' === response.status) {
+    // await set('membership', previous);
+    return response
+  }
+  set('preview', response.data.data);
+  return response
+};
+
+/**
+ * @memberof Providers.Subscription
+ * @instance
+ * @summary Updates the subscription payment profile state as the provided string.
+ * @param { string } profile - The profile profile id.
+ * @param { Config } config - The component configuration.
+ * @returns { Response }
+ */
+const updateProfile = async (profile, config) => {
+  if (config.debug) {
+    console.log('Providers.Subscription:updateProfile():submitted data', { profile, config });
+  }
+  const previous = state.profile
+
+  await set('profile', profile);
+
+  const response = await updatePreview(config)
+
+  if ('error' === response.status) {
+    await set('profile', previous);
+    return response
+  }
+  set('preview', response.data.data);
+  return response
+};
+
+const memberships = ['korm-plus-monthly', 'korm-plus-annual', 'korm-pro-monthly', 'korm-pro-annual', 'konrm-plus-annual', 'konrm-pro-annual', 'konrm-pro-annual-gift', 'korm-pro-annual-149']
+
+/**
+ * @memberof Providers.Subscription
+ * @instance
+ * @summary Updates the subscription preview state as the provided string.
+ * @returns { Response }
+ */
+const updatePreview = async (config = {}, options = {}) => {
+  const { product, profile, coupon, customer, token, membership, recipient } = state;
+  if (config.debug) {
+    console.log('Providers.Subscription:updatePreview():submitted data', { product, options, profile, coupon, customer, token, membership, config, recipient });
   }
   if (!config.api.uri) {
     return Error('Providers.Auth:loadUser() | Api config is required to retreive customer information.');
   }
+  let url = `${config.api.uri}/${config.api.version}/customers/subscriptions/preview`;
 
-  state.isLoading = true;
-  const url = `${config.api.uri}/${config.api.version}/users/login`;
-  const headers = new Headers();
+  if (customer) {
+    if (!token) return Error('Providers.Subscription:updatePreview() | User Token is required to retreive customer information.');
+    const exists = memberships.filter((handle) => handle === product);
 
-  headers.append('Content-Type', 'application/x-www-form-urlencoded');
-  headers.append('Authorization', `Basic ${window.btoa(unescape(encodeURIComponent(`${username}:${password}`)))}`);
-
-  const response = await Api.get(url, headers);
-  state.isLoading = false;
-
-  if (config.debug) {
-    console.log('Providers.Auth:login():response data', response);
-  }
-
-  if (response.status === 'error') {
-    setUser(null);
-    return response;
-  }
-  setUser(response.data.data);
-  return response;
-};
-
-/**
- * @memberof Providers.Auth
- * @instance
- * @summary Attempts to register a user with the given user properties.
- * @param { string } firstname - The firstname.
- * @param { string } lastname - The lastname.
- * @param { string } email - The email.
- * @param { string } username - The username.
- * @param { string } password - The password.
- * @param { string } confirm - The confirm.
- * @param { Config } config - The component configuration.
- * @implements {@link Services.Api#post|Services.Api.post()}
- * @returns { Response } 
- * @throws { Error }
- */
-const register = async (firstname, lastname, email, username, password, confirm, config = {}) => {
-  if (config.debug) {
-    console.log('Providers.Auth:register():submitted data', { firstname, lastname, email, username, password, confirm, config });
-  }
-  if (!config.api.uri) {
-    return Error('Providers.Auth:loadUser() | Api config is required to retreive customer information.');
+    if (membership &amp;&amp; 'konrm-pro-annual-gift' !== product &amp;&amp; exists.length) {
+      url = `${config.api.uri}/${config.api.version}/customers/${customer}/subscriptions/${membership}/preview?token=${token}&amp;now=${Date.now()}`;
+    } else {
+      url = `${config.api.uri}/${config.api.version}/customers/${customer}/subscriptions/preview?token=${token}&amp;now=${Date.now()}`;
+    }
   }
 
   state.isLoading = true;
-  const url = `${config.api.uri}/${config.api.version}/users/registration`;
-  const headers = new Headers();
+  const body = {
+    // available_products: options,
+    product_handle: product
+  }
 
+  if (profile) body.payment_profile_id = profile;
+  if (coupon) body.coupon_code = coupon;
+  if (recipient) body.gift_email = recipient;
+
+  const headers = new Headers();
   headers.append('Accept', 'application/json');
   headers.append('Content-Type', 'application/json');
 
-  const body = {
-    firstName: firstname,
-    lastName: lastname,
-    userName: username,
-    email,
-    password,
-  };
-
-  const response = await Api.post(url, body, headers);
+  const response = await Api.post(url, body, headers)
   state.isLoading = false;
 
   if (config.debug) {
-    console.log('Providers.Auth:register():response data', response);
+    console.log('Providers.Subscription:updatePreview():response data', response);
   }
 
-  if (response.status === 'error') {
-    setUser(null);
-    return response;
-  }
-  setUser(response.data.data);
   return response;
 };
 
-/**
- * @memberof Providers.Auth
- * @instance
- * @summary Attempts to load a user with the provided id and token.
- * @param { string } id - The user id.
- * @param { string } token - The token.
- * @param { Config } config - The component configuration.
- * @implements {@link Services.Api#fetch|Services.Api.fetch()}
- * @returns { Response } 
- * @throws { Error }
- */
-const loadUser = async (id, token, config) => {
+const purchase = async (config = {}) => {
+  const { product, profile, coupon, customer, token, membership, recipient } = state;
   if (config.debug) {
-    console.log('Providers.Auth:loadUser():submitted data', { id, token, config });
+    console.log('Providers.Subscription:purchase():submitted data', { product, options, profile, coupon, customer, token, membership, config, recipient });
   }
   if (!config.api.uri) {
-    return Error('Providers.Auth:loadUser() | Api config is required to retreive customer information.');
+    return Error('Providers.Auth:purchase() | Api config is required to retreive customer information.');
   }
-  if (!token) {
-    return Error('Providers.Auth:loadUser() | User token is required.');
-  }
-  if (!id) {
-    return Error('Providers.Auth:loadUser() | Customer id is required.');
+  let url = `${config.api.uri}/${config.api.version}/customers/subscriptions`;
+
+  if (customer) {
+    if (!token) return Error('Providers.Subscription:updatePreview() | User Token is required to retreive customer information.');
+    const exists = memberships.filter((handle) => handle === product);
+
+    if (membership &amp;&amp; 'konrm-pro-annual-gift' !== product &amp;&amp; exists.length) {
+      url = `${config.api.uri}/${config.api.version}/customers/${customer}/subscriptions/${membership}?token=${token}&amp;now=${Date.now()}`;
+    } else {
+      url = `${config.api.uri}/${config.api.version}/customers/${customer}/subscriptions?token=${token}&amp;now=${Date.now()}`;
+    }
   }
 
   state.isLoading = true;
-  const url = `${config.api.uri}/${config.api.version}/users/${id}?token=${token}`;
-  const response = await Api.fetch(url);
+  const body = {
+    // available_products: options,
+    product_handle: product
+  }
+
+  if (profile) body.payment_profile_id = profile;
+  if (coupon) body.coupon_code = coupon;
+  if (recipient) body.gift_email = recipient;
+
+  const headers = new Headers();
+  headers.append('Accept', 'application/json');
+  headers.append('Content-Type', 'application/json');
+
+  const response = await Api.post(url, body, headers)
   state.isLoading = false;
 
   if (config.debug) {
-    console.log('Providers.Auth:loadUser():response data', response);
+    console.log('Providers.Subscription:purchase():response data', response);
   }
 
-  if (response.status === 'error') {
-    setUser(null);
-    return response;
-  }
-  setUser(response.data.data);
   return response;
-}
+};
+
 
 /**
  * KelbyOne Auth Provider
@@ -279,25 +378,37 @@ const loadUser = async (id, token, config) => {
  * @property { Boolean } isLoading General loading state.
  * @property { Boolean } isCreating General creating state.
  * @property { Boolean } isUpdating General updating state.
- * @property { Object | null } getUser Returns the state of the user object.
- * @property { Boolean } hasUser Returns whether a user exists.
+ * @property { String | null } getProduct Returns the state of the subscription product.
+ * @property { Boolean } hasProduct Returns whether a subscription product exists.
+ * @property { String | null } getProfile Returns the state of the subscription payment profile.
+ * @property { Boolean } hasProfile Returns whether a subscription payment profile exists.
+ * @property { Boolean } hasProduct Returns whether a subscription product exists.
+ * @property { Object | null } getPreview Returns the state of the subscription preview.
+ * @property { Boolean } hasPreview Returns whether a subscription preview exists.
  */
 export default function AuthProvider() {
   return readonly({
-    login,
-    register,
-    loadUser,
-    setUser,
+    updateProduct,
+    updateCoupon,
+    updateCustomer,
+    updateMembership,
+    updateProfile,
+    purchase,
     // General
     isLoading: computed(() => Boolean(state.isLoading)),
     isCreating: computed(() => Boolean(state.isCreating)),
     isUpdating: computed(() => Boolean(state.isUpdating)),
-    // User
-    getUser: computed(() => state.user),
-    hasUser: computed(() => Boolean(state.user)),
+    // Product
+    getProduct: computed(() => state.product),
+    hasProduct: computed(() => Boolean(state.product)),
+    // Profile
+    getProfile: computed(() => state.profile),
+    hasProfile: computed(() => Boolean(state.profile)),
+    // Preview
+    getPreview: computed(() => state.preview),
+    hasPreview: computed(() => Boolean(state.preview)),
   });
-}
-</code></pre>
+}</code></pre>
         </article>
     </section>
 

@@ -85,7 +85,7 @@
   <body>
 
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="9477875" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Auth_Login_Register.html">Auth:Login_Register</a></li></ul> </div><div class="accordion collapsed" id="9748486" > <h3 class="accordion-heading">Namespaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=2119061><div class="accordion-heading child"><a href="Providers.Auth.html">Auth</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Providers.Auth.html#loadUser">loadUser</a></li><li data-type='method'><a href="Providers.Auth.html#login">login</a></li><li data-type='method'><a href="Providers.Auth.html#register">register</a></li><li data-type='method'><a href="Providers.Auth.html#setUser">setUser</a></li></ul></li><li class="accordion collapsed child" id=8224727><div class="accordion-heading child"><a href="Providers.Customer.html">Customer</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Providers.Customer.html#loadCustomer">loadCustomer</a></li><li data-type='method'><a href="Providers.Customer.html#setCustomer">setCustomer</a></li></ul></li><li class="accordion collapsed child" id=3918260><div class="accordion-heading child"><a href="Services.Api.html">Api</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Services.Api.html#delete">delete</a></li><li data-type='method'><a href="Services.Api.html#fetch">fetch</a></li><li data-type='method'><a href="Services.Api.html#get">get</a></li><li data-type='method'><a href="Services.Api.html#patch">patch</a></li><li data-type='method'><a href="Services.Api.html#post">post</a></li></ul></li></ul> </div><div class="accordion collapsed" id="1101388" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li></ul> </div></div>
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="8259192" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="9875618" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
       
 
     </nav>
@@ -112,6 +112,82 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
+ * Represents the User Object Structure.
+ *
+ * @interface User
+ * @property { string } id
+ * @property { string } token
+ */
+
+/**
+ * Represents the Products Object Structure.
+ *
+ * @interface Products
+ * @property { Array&lt;Product> } options
+ * @property { string } [selected]
+ */
+
+/**
+ * Represents the Product Object Structure.
+ *
+ * @interface Product
+ * @property { ProductDetails } product
+ * @property { string } title
+ * @property { string } [description]
+ * @property { string } [duration]
+ * @property { string } [cta]
+ * @property { string } [recurring]
+ *
+ * @example
+ *
+// Memberships
+  {
+    title: 'Pro',
+    description: 'Monthly',
+    product: {
+      handle: 'korm-pro-monthly',
+      price: '1999',
+    },
+    duration: 'month',
+    cta: null,
+    recurring: 'recurring / cancel anytime',
+  },
+  {
+    title: 'Pro',
+    description: 'Annual',
+    product: {
+      handle: 'korm-pro-annual',
+      price: '19900',
+    },
+    duration: 'year',
+    cta: 'save $40',
+    recurring: 'recurring / cancel anytime',
+  }
+
+// Single Course
+  {
+    title: 'Acrobat 8 Professional for Graphic Designers',
+    description: 'by Terry White',
+    product: {
+      handle: 'pc-8405',
+      price: '2900'
+    },
+    duration: 'lifetime',
+    cta: 'Unlimited Lifetime Access',
+    recurring: null,
+  }
+ *
+ */
+
+/**
+ * Represents the Product Details Object Structure.
+ *
+ * @interface ProductDetails
+ * @property { string } handle
+ * @property { string } price
+ */
+
+/**
  * Represents the Response Object Structure.
  *
  * @interface Response
@@ -133,8 +209,7 @@
  * @interface Config.Api
  * @property { string } uri
  * @property { string } version
- */
-</code></pre>
+ */</code></pre>
         </article>
     </section>
 
@@ -159,7 +234,7 @@
       <script src="scripts/search.js"></script>
       <script src="scripts/third-party/fuse.js"></script>
       <script>
-        var list = [{"title":"Auth:Login_Register","link":"<a href=\"Auth_Login_Register.html\">Auth:Login_Register</a>"},{"title":"Auth","link":"<a href=\"Providers.Auth.html\">Auth</a>"},{"title":"Providers.Auth#loadUser","link":"<a href=\"Providers.Auth.html#loadUser\">Providers.Auth &rtrif; loadUser</a>"},{"title":"Providers.Auth#login","link":"<a href=\"Providers.Auth.html#login\">Providers.Auth &rtrif; login</a>"},{"title":"Providers.Auth#register","link":"<a href=\"Providers.Auth.html#register\">Providers.Auth &rtrif; register</a>"},{"title":"Providers.Auth#setUser","link":"<a href=\"Providers.Auth.html#setUser\">Providers.Auth &rtrif; setUser</a>"},{"title":"Customer","link":"<a href=\"Providers.Customer.html\">Customer</a>"},{"title":"Providers.Customer#loadCustomer","link":"<a href=\"Providers.Customer.html#loadCustomer\">Providers.Customer &rtrif; loadCustomer</a>"},{"title":"Providers.Customer#setCustomer","link":"<a href=\"Providers.Customer.html#setCustomer\">Providers.Customer &rtrif; setCustomer</a>"},{"title":"Api","link":"<a href=\"Services.Api.html\">Api</a>"},{"title":"Services.Api#delete","link":"<a href=\"Services.Api.html#delete\">Services.Api &rtrif; delete</a>"},{"title":"Services.Api#fetch","link":"<a href=\"Services.Api.html#fetch\">Services.Api &rtrif; fetch</a>"},{"title":"Services.Api#get","link":"<a href=\"Services.Api.html#get\">Services.Api &rtrif; get</a>"},{"title":"Services.Api#patch","link":"<a href=\"Services.Api.html#patch\">Services.Api &rtrif; patch</a>"},{"title":"Services.Api#post","link":"<a href=\"Services.Api.html#post\">Services.Api &rtrif; post</a>"},{"title":"Config","link":"<a href=\"Config.html\">Config</a>"},{"title":"Api","link":"<a href=\"Config.Api.html\">Api</a>"},{"title":"Response","link":"<a href=\"Response.html\">Response</a>"}];
+        var list = [{"title":"Auth:Login-Register","link":"<a href=\"Auth_Login-Register.html\">Auth:Login-Register</a>"},{"title":"Purchase:Bundle","link":"<a href=\"Purchase_Bundle.html\">Purchase:Bundle</a>"},{"title":"Purchase:Course","link":"<a href=\"Purchase_Course.html\">Purchase:Course</a>"},{"title":"Purchase:Cyber","link":"<a href=\"Purchase_Cyber.html\">Purchase:Cyber</a>"},{"title":"Purchase:Gift","link":"<a href=\"Purchase_Gift.html\">Purchase:Gift</a>"},{"title":"Purchase:Redeem","link":"<a href=\"Purchase_Redeem.html\">Purchase:Redeem</a>"},{"title":"Purchase:Subscription","link":"<a href=\"Purchase_Subscription.html\">Purchase:Subscription</a>"},{"title":"Subscription:Change-Plan","link":"<a href=\"Subscription_Change-Plan.html\">Subscription:Change-Plan</a>"},{"title":"Subscription:Migrate","link":"<a href=\"Subscription_Migrate.html\">Subscription:Migrate</a>"},{"title":"Subscription:Pay","link":"<a href=\"Subscription_Pay.html\">Subscription:Pay</a>"},{"title":"Subscription:Renew","link":"<a href=\"Subscription_Renew.html\">Subscription:Renew</a>"},{"title":"Config","link":"<a href=\"Config.html\">Config</a>"},{"title":"Api","link":"<a href=\"Config.Api.html\">Api</a>"},{"title":"Product","link":"<a href=\"Product.html\">Product</a>"},{"title":"ProductDetails","link":"<a href=\"ProductDetails.html\">ProductDetails</a>"},{"title":"Products","link":"<a href=\"Products.html\">Products</a>"},{"title":"Response","link":"<a href=\"Response.html\">Response</a>"},{"title":"User","link":"<a href=\"User.html\">User</a>"}];
         var options = 
           setupSearch(list, options)
       </script>

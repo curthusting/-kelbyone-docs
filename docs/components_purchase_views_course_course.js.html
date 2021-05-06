@@ -85,7 +85,7 @@
   <body>
 
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="5621739" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="2543066" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="8927176" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="2989071" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
       
 
     </nav>
@@ -116,7 +116,7 @@
 import AuthLoginRegisterComponent from '@/components/auth/blocks/login-register/login-register.vue';
 import PurchaseProductSelectComponent from '@/components/purchase/blocks/product-select/product-select.vue';
 import PaymentBillingDetailsComponent from '@/components/payment/blocks/billing-details/billing-details.vue';
-import PurchaseSummaryCourseComponent from '@/components/purchase/blocks/summary-course/summary-course.vue';
+import PurchaseSummaryComponent from '@/components/purchase/blocks/summary/summary.vue';
 import PurchaseCouponComponent from '@/components/purchase/blocks/coupon/coupon.vue';
 
 /**
@@ -128,23 +128,24 @@ import PurchaseCouponComponent from '@/components/purchase/blocks/coupon/coupon.
  * @prop { User } [user] Authenticated user details
  * @prop { String } [coupon] Promotion code
  * 
+ * @see [Components Example]{@link https://kelbystaging.wpengine.com/checkout-components/?component=purchase-course-view&amp;products=pc-8405&amp;selected=pc-8405} Please DO NOT submuit the Components Example form with the given params or the example could break.
  * 
  * @example
-  koc("loadComponent", {
-    name: "purchase-course-view",
-    el: "#kelbyone-component-view",
-    props: {
-      config: { ... },
-      products: { options: [{ ... }], selected: ... },
-      user: { ... },
-      coupon: ...,
-    }
-  });
+koc("loadComponent", {
+  name: "purchase-course-view",
+  el: "#kelbyone-component-view",
+  props: {
+    config: { ... },
+    products: { options: [{ ... }], selected: ... },
+    user: { ... },
+    coupon: ...,
+  }
+});
  *
  */
 
 export default {
-  name: 'PurchaseGiftView',
+  name: 'PurchaseCourseView',
   props: {
     config: {
       type: Object,
@@ -166,8 +167,8 @@ export default {
     AuthLoginRegisterComponent,
     PurchaseProductSelectComponent,
     PaymentBillingDetailsComponent,
-    PurchaseSummaryCourseComponent,
-    PurchaseCouponComponent
+    PurchaseCouponComponent,
+    PurchaseSummaryComponent,
   },
   setup() {
     let config = inject('config');
@@ -191,6 +192,7 @@ export default {
       hasProfiles: computed(() => customerProvider().hasProfiles),
       profiles: computed(() => customerProvider().getProfiles),
       defaultProfile: computed(() => customerProvider().getDefaultProfile),
+      selectedProfile: computed(() => subscriptionProvider().getProfile),
       canSubmit: computed(() => state.selected &amp;&amp; state.payment &amp;&amp; state.terms)
     });
 
@@ -317,10 +319,9 @@ export default {
 
       await handleResponse(response);
 
-      if ('success' === response.status) {
-        await customerProvider().updatePayment(details.id);
-        state.expanded = 3;
-      }
+      // if ('success' === response.status) {
+      //   state.expanded = 3;
+      // }
     }
 
     const removePayment = async (details) => {

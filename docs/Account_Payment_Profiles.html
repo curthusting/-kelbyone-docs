@@ -28,7 +28,7 @@
 
 
     <title>
-      Product
+      Account:Payment_Profiles
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Product
+        Account:Payment_Profiles
       </h1>
       
 
@@ -114,15 +114,6 @@
 
 <header>
     
-        
-        <h2>
-        
-        Product
-        
-        </h2>
-        
-        
-    
 </header>
 
 
@@ -130,7 +121,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Represents the Product Object Structure.</p></div>
+            <div class="description"><p>Account Payment Profiles View</p></div>
         
 
         
@@ -151,8 +142,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -165,182 +154,46 @@
 
         <tr>
             
-                <td class="name"><code>product</code></td>
+                <td class="name"><code>config</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="ProductDetails.html">ProductDetails</a></span>
+<span class="param-type"><a href="Config.html">Config</a></span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>Component configuration</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>title</code></td>
+                <td class="name"><code>user</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="User.html">User</a></span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>description</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>duration</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>cta</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>recurring</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
+            <td class="description last"><p>Authenticated user details</p></td>
         </tr>
 
     
@@ -382,7 +235,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services__interfaces.js.html">services/_interfaces.js</a>, <a href="services__interfaces.js.html#line17">line 17</a>
+                <a href="components_account_views_payment-profiles_payment-profiles.js.html">components/account/views/payment-profiles/payment-profiles.js</a>, <a href="components_account_views_payment-profiles_payment-profiles.js.html#line6">line 6</a>
             </li></ul></dd>
         </div>
     
@@ -401,42 +254,14 @@
             <h3>Example</h3>
             
     <div class="rel">
-    <pre class="prettyprint"><code>// Memberships
-  {
-    title: 'Pro',
-    description: 'Monthly',
-    product: {
-      handle: 'korm-pro-monthly',
-      price: '1999',
-    },
-    duration: 'month',
-    cta: null,
-    recurring: 'recurring / cancel anytime',
-  },
-  {
-    title: 'Pro',
-    description: 'Annual',
-    product: {
-      handle: 'korm-pro-annual',
-      price: '19900',
-    },
-    duration: 'year',
-    cta: 'save $40',
-    recurring: 'recurring / cancel anytime',
+    <pre class="prettyprint"><code>koc("loadComponent", {
+  name: "account-payment-profiles-view",
+  el: "#kelbyone-component-view",
+  props: {
+    config: { ... },
+    user: { ... },
   }
-
-// Single Course
-  {
-    title: 'Acrobat 8 Professional for Graphic Designers',
-    description: 'by Terry White',
-    product: {
-      handle: 'pc-8405',
-      price: '2900'
-    },
-    duration: 'lifetime',
-    cta: 'Unlimited Lifetime Access',
-    recurring: null,
-  }</code></pre>
+});</code></pre>
     
     
     </div>

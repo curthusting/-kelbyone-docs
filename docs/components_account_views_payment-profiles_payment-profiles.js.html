@@ -28,7 +28,7 @@
 
 
     <title>
-      Product
+      components/account/views/payment-profiles/payment-profiles.js
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Product
+        components/account/views/payment-profiles/payment-profiles.js
       </h1>
       
 
@@ -108,363 +108,191 @@
 
 
 
-
-<section>
-
-
-<header>
     
-        
-        <h2>
-        
-        Product
-        
-        </h2>
-        
-        
-    
-</header>
-
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Represents the Product Object Structure.</p></div>
-        
-
-        
-
-
-
-    <h5 class="subsection-title">Properties</h5>
-
-    
-<div class="allow-overflow">
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>product</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="ProductDetails.html">ProductDetails</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>title</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>description</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>duration</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>cta</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>recurring</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="services__interfaces.js.html">services/_interfaces.js</a>, <a href="services__interfaces.js.html#line17">line 17</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-        
-            <h3>Example</h3>
-            
-    <div class="rel">
-    <pre class="prettyprint"><code>// Memberships
-  {
-    title: 'Pro',
-    description: 'Monthly',
-    product: {
-      handle: 'korm-pro-monthly',
-      price: '1999',
-    },
-    duration: 'month',
-    cta: null,
-    recurring: 'recurring / cancel anytime',
-  },
-  {
-    title: 'Pro',
-    description: 'Annual',
-    product: {
-      handle: 'korm-pro-annual',
-      price: '19900',
-    },
-    duration: 'year',
-    cta: 'save $40',
-    recurring: 'recurring / cancel anytime',
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { reactive, inject, ref, computed } from 'vue';
+
+import AuthLoginRegisterComponent from '@/components/auth/blocks/login-register/login-register.vue';
+import PaymentBillingDetailsComponent from '@/components/payment/blocks/billing-details/billing-details.vue';
+
+/**
+ * Account Payment Profiles View
+ * @module Account:Payment_Profiles
+ * 
+ * @prop { Config } config Component configuration
+ * @prop { User } user Authenticated user details
+ * 
+ * 
+ * @example
+koc("loadComponent", {
+  name: "account-payment-profiles-view",
+  el: "#kelbyone-component-view",
+  props: {
+    config: { ... },
+    user: { ... },
   }
+});
+ *
+ */
 
-// Single Course
-  {
-    title: 'Acrobat 8 Professional for Graphic Designers',
-    description: 'by Terry White',
-    product: {
-      handle: 'pc-8405',
-      price: '2900'
+export default {
+  name: 'AccountPaymentProfiles',
+  props: {
+    config: {
+      type: Object,
+      required: false,
+      default: null,
     },
-    duration: 'lifetime',
-    cta: 'Unlimited Lifetime Access',
-    recurring: null,
-  }</code></pre>
-    
-    
-    </div>
+    user: {
+      type: Object,
+      required: true,
+      default: null,
+    },
+  },
+  components: {
+    AuthLoginRegisterComponent,
+    PaymentBillingDetailsComponent,
+  },
+  setup() {
+    let config = inject('config');
+    config = { ...config, ...props.config };
 
-        
-    
-    </div>
+    const authProvider = inject('authProvider');
+    const customerProvider = inject('customerProvider');
+    const subscriptionProvider = inject('subscriptionProvider');
 
-    
+    const state = reactive({
+      expanded: ref(1),
+      showNotification: ref(false),
+      notification: ref(null),
+      user: computed(() => authProvider().getUser),
+      isLoadingUser: computed(() => authProvider().isLoading),
+      coupon: computed(() => subscriptionProvider().getCoupon),
+      payment: computed(() => subscriptionProvider().getProfile),
+      preview: computed(() => subscriptionProvider().getPreview),
+      hasProfiles: computed(() => customerProvider().hasProfiles),
+      getMembership: computed(() => customerProvider().getMembership),
+      hasMembership: computed(() => customerProvider().hasMembership),
+      profiles: computed(() => customerProvider().getProfiles),
+      defaultProfile: computed(() => customerProvider().getDefaultProfile),
+      selectedProfile: computed(() => subscriptionProvider().getProfile),
+      canSubmit: computed(() => state.defaultProfile &amp;&amp; state.payment)
+    });
 
-    
+    const handleResponse = async (response) => {
+      if (response.status === 'error') {
+        state.showNotification = true;
+        state.notification = response.data.message || response.data.data.message || response.data.data;
+      } else {
+        state.showNotification = false;
+        state.notification = null;
+      }
+    };
 
-    
+    const loadCustomer = async (customer, token) => {
+      state.showNotification = true;
+      state.notification = 'Loading Customer...';
+      await customerProvider().loadCustomer(customer, token, config);
 
-     
+      state.showNotification = true;
+      state.notification = 'Updating Customer...';
+      let response = await subscriptionProvider().updateCustomer(customer, token, config);
 
-    
+      if (customerProvider().hasCustomerMembership) {
+        state.showNotification = true;
+        state.notification = 'Loading Membership...';
+        const membership = await customerProvider().getCustomerMembership;
+        response = await subscriptionProvider().updateMembership(membership, config);
+      }
+      await handleResponse(response);
+    }
 
-    
+    const loadUser = async (user) => {
+      state.showNotification = true;
+      state.notification = 'Loading User...';
 
-    
+      const { id, token } = user;
 
-    
+      let response = await authProvider().loadUser(id, token, config);
+      await handleResponse(response);
 
-    
-</article>
+      if ('success' === response.status) {
+        const { data } = response.data;
+        response = await loadCustomer(data.customer.id, data.token)
+      }
+    };
 
-</section>
+    if (props.user) {
+      loadUser(props.user);
+    } else {
+      state.isExpanded = true;
+    }
+
+    const login = async (data) => {
+      state.showNotification = true;
+      state.notification = 'Validating Credentials...';
+
+      const { username, password } = data;
+      const response = await authProvider().login(username, password, config);
+      await handleResponse(response);
+
+      if ('success' === response.status) {
+        const { data } = response.data;
+        await loadCustomer(data.customer.id, data.token)
+      }
+    };
+
+    const register = async (data) => {
+      state.showNotification = true;
+      state.notification = 'Creating Account...';
+
+      const { firstname, lastname, email, username, password, confirm } = data;
+      let response = await authProvider().register(firstname, lastname, email, username, password, confirm, config);
+      await handleResponse(response);
+
+      if ('success' === response.status) {
+        const { data } = response.data;
+        response = await loadCustomer(data.customer.id, data.token)
+      }
+    };
+
+    const createPayment = async (details) => {
+      state.showNotification = true;
+      state.notification = 'Creating Payment Method...';
+
+      const response = await customerProvider().createPayment(details, state.user.token, config);
+
+      await handleResponse(response);
+    }
+
+    const removePayment = async (details) => {
+      state.showNotification = true;
+      state.notification = 'Removing Payment Method...';
+
+      const response = await customerProvider().removePayment(details.id, state.user.token, config);
+
+      await handleResponse(response);
+    }
+
+    const updatePayment = async (details) => {
+      state.showNotification = true;
+      state.notification = 'Updating Payment Method...';
+
+      if (state.hasMembership) {
+        const response = await subscriptionProvider().setProfile(state.getMembership, details.id, config);
+
+        await handleResponse(response);
+      }
+    }
+
+    const clearNotification = async () => state.showNotification = false;
+
+    return { login, register, createPayment, updatePayment, removePayment, clearNotification, state };
+  },
+};</code></pre>
+        </article>
+    </section>
 
 
 

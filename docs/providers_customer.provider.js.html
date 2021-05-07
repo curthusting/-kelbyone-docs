@@ -85,7 +85,7 @@
   <body>
 
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="4182681" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Account_Payment_Profiles.html">Account:Payment_Profiles</a></li><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="2526868" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="4945604" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Account_Payment_Profiles.html">Account:Payment_Profiles</a></li><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="813276" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
       
 
     </nav>
@@ -128,23 +128,37 @@ const state = reactive({
 });
 
 /**
+ * @memberof Providers.Subscription
+ * @instance
+ * @summary Sets the subscription product state as the provided string.
+ * @param { string } product - The product handle string.
+ * @returns { void }
+ */
+const set = (key, value) => {
+  state[key] = value;
+};
+
+/**
  * @memberof Providers.Customer
  * @instance
  * @summary Sets the customer state as the provided object.
  * @param { object } customer - The customer object.
  * @returns { void } 
  */
-const setCustomer = async (customer = {}) => {
+const setCustomer = async (customer = {}, config) => {
+  if (config.debug) {
+    console.log('Providers.Customer:setCustomer():submitted data', customer);
+  }
+  await set('customer', customer);
   const membership = await customer.subscriptions.filter((subscription) => subscription.type === 'membership')[0];
-  state.profiles = customer.profiles;
+  await set('profiles', customer.profiles);
   // if (customer.profiles &amp;&amp; 1 === customer.profiles.length) state.profile = customer.profiles[0].id;
   if (membership) {
-    state.membership = membership.id;
-    if (membership.current.profile.id) {
-      state.profile = membership.current.profile.id;
+    await set('membership', membership.id);
+    if (membership.current &amp;&amp; membership.current.profile.id) {
+      await set('profile', membership.current.profile.id);
     }
   }
-  state.customer = customer;
 };
 
 /**
@@ -182,11 +196,11 @@ const loadCustomer = async (id, token, config) => {
   }
 
   if (response.status === 'error') {
-    setCustomer(null);
+    setCustomer(null, config);
     return response;
   }
 
-  setCustomer(response.data.data);
+  setCustomer(response.data.data, config);
   return response;
 };
 
@@ -203,6 +217,9 @@ const createPayment = async (details, token, config) => {
   if (!config.api.uri) {
     return Error('Providers.Customer:createPayment() | Api config is required to create customer payment.');
   }
+  const { customer } = state
+  console.log('createPayment', state, customer)
+
   let url = `${config.api.uri}/${config.api.version}/customers/${state.customer.id}/profiles?token=${token}&amp;now=${Date.now()}`;
 
   const headers = new Headers();
@@ -273,8 +290,8 @@ export default function CustomerProvider() {
     getSubscriptions: computed(() => state.subscriptions),
     hasSubscriptions: computed(() => Boolean(state.customer &amp;&amp; state.customer.subscriptions &amp;&amp; state.customer.subscriptions.length)),
     // Membership
-    getMembership: computed(() => state.membership),
-    hasMembership: computed(() => Boolean(state.membership)),
+    getCustomerMembership: computed(() => state.membership),
+    hasCustomerMembership: computed(() => Boolean(state.membership)),
   });
 }
 </code></pre>

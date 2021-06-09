@@ -28,7 +28,7 @@
 
 
     <title>
-      Account:Payment_Profiles
+      components/content/views/search/search.js
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Account:Payment_Profiles
+        components/content/views/search/search.js
       </h1>
       
 
@@ -108,197 +108,153 @@
 
 
 
-
-<section>
-
-
-<header>
     
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { reactive, inject, ref, computed } from 'vue';
 
+/**
+ * Content Search View
+ * @module Content:Search
+ *
+ * @prop { Config } config Component configuration
+ * @prop { User } user Authenticated user details
+ * @prop { String } type Content type filter
+ *
+ *
+ * @example
+  koc("loadComponent", {
+    name: "scontent-search-view",
+    el: "#kelbyone-component-view",
+    props: {
+      config: { ... },
+      user: { ... },
+      type: ...
+    }
+  });
+ *
+ */
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Account Payment Profiles View</p></div>
-        
+const win = window;
 
-        
-
-
-
-    <h5 class="subsection-title">Properties</h5>
-
-    
-<div class="allow-overflow">
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Config.html">Config</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Component configuration</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>user</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="User.html">User</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Authenticated user details</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="components_account_views_payment-profiles_payment-profiles.js.html">components/account/views/payment-profiles/payment-profiles.js</a>, <a href="components_account_views_payment-profiles_payment-profiles.js.html#line6">line 6</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-see">See:</dt>
-            <dd class="tag-see">
-                <ul>
-                    <li><p><a href="https://kelbystaging.wpengine.com/checkout-components/?component=account-payment-profiles-view&amp;user=139167&amp;token=6094485c4050b0.49135056">Components Example</a></p></li>
-                </ul>
-            </dd>
-        </div>
-    
-
-    
-</dl>
-
-
-
-
-        
-            <h3>Example</h3>
-            
-    <div class="rel">
-    <pre class="prettyprint"><code>koc("loadComponent", {
-  name: "account-payment-profiles-view",
-  el: "#kelbyone-component-view",
+export default {
+  name: 'ContentSearchView',
   props: {
-    config: { ... },
-    user: { ... },
+    config: {
+      type: Object,
+      required: false,
+      default: null,
+    },
+    user: {
+      type: Object,
+      required: false,
+      default: null,
+    },
+    type: {
+      type: String,
+      required: false,
+      default: null,
+    },
+  },
+  components: {
+  },
+  setup() {
+    let config = inject('config');
+    config = { ...config, ...props.config };
+
+    const authProvider = inject('authProvider');
+
+    const state = reactive({
+      expanded: ref(null),
+      data: ref(null),
+      refs: ref([])
+    });
+
+    const load = async () => {
+      const response = await fetch('https://members.kelbyone.com/wp-json/ko/v4/advanced_search?filter[type]=course&amp;page=1&amp;per_page=24&amp;filter[instructor]=Scott Kelby')
+      const data = await response.json();
+      console.log('data', data.data);
+      return state.data = data.data;
+    }
+
+    load();
+
+    // scrollTo = function (x = 0, y = 0) {
+    //   console.log('scrollTo', x, y)
+    //   return window.scrollTo(x, y);
+    // }
+    const setScroll = async (x = 0, y = 0) => {
+      console.log('scrollTo', x, y)
+      return await window.scrollTo(x, y);
+    }
+
+    const getPosition = async element => {
+      return { offsetLeft, offsetTop } = state.refs[element];
+    }
+
+    const toggleExpanded = async (element) => {
+      console.log('clicked', element)
+      const clone = document.getElementById(`clone-${element}`);
+      var viewportOffset = state.refs[element].getBoundingClientRect();
+      const top = viewportOffset.top + (state.refs[element].clientHeight / 2);
+      const left = viewportOffset.left + (state.refs[element].clientWidth / 2);
+      const scale = state.refs[element].clientWidth / window.innerWidth
+      clone.style.top = `${top}px`
+      clone.style.left = `${left}px`
+      clone.style.transform = `scale(${scale})`
+      // clone.style.width = `${state.refs[element].clientHeight}px`
+      // clone.style.height = `${state.refs[element].clientWidth}px`
+      // setTimeout(() => {
+      document.body.classList.toggle('koc-has-overlay');
+      state.expanded ? state.expanded = null : state.expanded = element;
+      // }, 125)
+      if (clone.classList.contains('expanded')) {
+        clone.classList.remove('expanded')
+      } else {
+        setTimeout(() => {
+          clone.classList.add('expanded')
+        }, 375)
+      }
+    }
+
+    return { toggleExpanded, state };
+  },
+  methods: {
+    load: async () => {
+
+    },
+    formatDuration: (seconds) => {
+      seconds = parseInt(seconds);
+      if ('undefined' == typeof seconds || Number.isNaN(seconds)) {
+        seconds = 0;
+      }
+      var date = new Date(null);
+      var start = 12;
+      var length = 7;
+      date.setSeconds(seconds);
+
+      let trimmed = date.toISOString().substr(start, length);
+
+      if (trimmed.startsWith('0:')) {
+        return trimmed.substr(2, 5);
+      }
+
+      return trimmed;
+    },
+    formatUrl: (item) => {
+      // console.log('formatUrl', item)
+      // @ToDo add this to the component config
+      const parts = ['type', 'slug'];
+      let url = '/';
+      for (const part of parts) {
+        url = `${url}${item[part]}/`;
+      }
+      return url;
+    }
   }
-});</code></pre>
-    
-    
-    </div>
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+};</code></pre>
+        </article>
+    </section>
 
 
 

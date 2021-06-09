@@ -85,7 +85,7 @@
   <body>
 
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="4751953" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Account_Payment_Profiles.html">Account:Payment_Profiles</a></li><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="763393" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="478754" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Account_Payment_Profiles.html">Account:Payment_Profiles</a></li><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Content_Search.html">Content:Search</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="9024457" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
       
 
     </nav>
@@ -217,20 +217,52 @@ const createPayment = async (details, token, config) => {
   if (!config.api.uri) {
     return Error('Providers.Customer:createPayment() | Api config is required to create customer payment.');
   }
-  const { customer } = state
-  console.log('createPayment', state, customer)
 
   let url = `${config.api.uri}/${config.api.version}/customers/${state.customer.id}/profiles?token=${token}&amp;now=${Date.now()}`;
 
   const headers = new Headers();
+
   headers.append('Accept', 'application/json');
   headers.append('Content-Type', 'application/json');
 
   const response = await Api.post(url, details, headers);
+
   if (config.debug) {
     console.log('Providers.Customer:createPayment():response', response);
   }
-  return await loadCustomer(state.customer.id, token, config);
+  await loadCustomer(state.customer.id, token, config);
+  return response;
+}
+
+const updatePayment = async (details, token, config) => {
+  if (config.debug) {
+    console.log('Providers.Customer:updatePayment():submitted data', { details, token, config });
+  }
+  if (!details) {
+    return Error('Providers.Customer:updatePayment() | Payment Details are required to update customer payment.');
+  }
+  if (!token) {
+    return Error('Providers.Customer:updatePayment() | Token is required to update customer payment.');
+  }
+  if (!config.api.uri) {
+    return Error('Providers.Customer:updatePayment() | Api config is required to update customer payment.');
+  }
+
+  let url = `${config.api.uri}/${config.api.version}/customers/${state.customer.id}/profiles/${details.id}?token=${token}&amp;now=${Date.now()}`;
+  delete details.id;
+
+  const headers = new Headers();
+
+  headers.append('Accept', 'application/json');
+  headers.append('Content-Type', 'application/json');
+
+  const response = await Api.patch(url, details, headers);
+
+  if (config.debug) {
+    console.log('Providers.Customer:createPayment():response', response);
+  }
+  await loadCustomer(state.customer.id, token, config);
+  return response;
 }
 
 const removePayment = async (payment, token, config) => {
@@ -244,10 +276,11 @@ const removePayment = async (payment, token, config) => {
   if (config.debug) {
     console.log('Providers.Customer:removePayment():response', response);
   }
-  return await loadCustomer(state.customer.id, token, config);
+  await loadCustomer(state.customer.id, token, config);
+  return response;
 }
 
-const updatePayment = async (payment) => state.profile = payment
+const activatePayment = async (payment) => state.profile = payment
 
 /**
  * KelbyOne Customer Provider
@@ -271,8 +304,9 @@ export default function CustomerProvider() {
     loadCustomer,
     setCustomer,
     createPayment,
-    removePayment,
     updatePayment,
+    removePayment,
+    activatePayment,
     // General
     isLoading: computed(() => Boolean(state.isLoading)),
     isCreating: computed(() => Boolean(state.isCreating)),
@@ -319,7 +353,7 @@ export default function CustomerProvider() {
       <script src="scripts/search.js"></script>
       <script src="scripts/third-party/fuse.js"></script>
       <script>
-        var list = [{"title":"Account:Payment_Profiles","link":"<a href=\"Account_Payment_Profiles.html\">Account:Payment_Profiles</a>"},{"title":"Auth:Login-Register","link":"<a href=\"Auth_Login-Register.html\">Auth:Login-Register</a>"},{"title":"Purchase:Bundle","link":"<a href=\"Purchase_Bundle.html\">Purchase:Bundle</a>"},{"title":"Purchase:Course","link":"<a href=\"Purchase_Course.html\">Purchase:Course</a>"},{"title":"Purchase:Cyber","link":"<a href=\"Purchase_Cyber.html\">Purchase:Cyber</a>"},{"title":"Purchase:Gift","link":"<a href=\"Purchase_Gift.html\">Purchase:Gift</a>"},{"title":"Purchase:Redeem","link":"<a href=\"Purchase_Redeem.html\">Purchase:Redeem</a>"},{"title":"Purchase:Subscription","link":"<a href=\"Purchase_Subscription.html\">Purchase:Subscription</a>"},{"title":"Subscription:Change-Plan","link":"<a href=\"Subscription_Change-Plan.html\">Subscription:Change-Plan</a>"},{"title":"Subscription:Migrate","link":"<a href=\"Subscription_Migrate.html\">Subscription:Migrate</a>"},{"title":"Subscription:Pay","link":"<a href=\"Subscription_Pay.html\">Subscription:Pay</a>"},{"title":"Subscription:Renew","link":"<a href=\"Subscription_Renew.html\">Subscription:Renew</a>"},{"title":"Config","link":"<a href=\"Config.html\">Config</a>"},{"title":"Api","link":"<a href=\"Config.Api.html\">Api</a>"},{"title":"Product","link":"<a href=\"Product.html\">Product</a>"},{"title":"ProductDetails","link":"<a href=\"ProductDetails.html\">ProductDetails</a>"},{"title":"Products","link":"<a href=\"Products.html\">Products</a>"},{"title":"Response","link":"<a href=\"Response.html\">Response</a>"},{"title":"User","link":"<a href=\"User.html\">User</a>"}];
+        var list = [{"title":"Account:Payment_Profiles","link":"<a href=\"Account_Payment_Profiles.html\">Account:Payment_Profiles</a>"},{"title":"Auth:Login-Register","link":"<a href=\"Auth_Login-Register.html\">Auth:Login-Register</a>"},{"title":"Content:Search","link":"<a href=\"Content_Search.html\">Content:Search</a>"},{"title":"Purchase:Bundle","link":"<a href=\"Purchase_Bundle.html\">Purchase:Bundle</a>"},{"title":"Purchase:Course","link":"<a href=\"Purchase_Course.html\">Purchase:Course</a>"},{"title":"Purchase:Cyber","link":"<a href=\"Purchase_Cyber.html\">Purchase:Cyber</a>"},{"title":"Purchase:Gift","link":"<a href=\"Purchase_Gift.html\">Purchase:Gift</a>"},{"title":"Purchase:Redeem","link":"<a href=\"Purchase_Redeem.html\">Purchase:Redeem</a>"},{"title":"Purchase:Subscription","link":"<a href=\"Purchase_Subscription.html\">Purchase:Subscription</a>"},{"title":"Subscription:Change-Plan","link":"<a href=\"Subscription_Change-Plan.html\">Subscription:Change-Plan</a>"},{"title":"Subscription:Migrate","link":"<a href=\"Subscription_Migrate.html\">Subscription:Migrate</a>"},{"title":"Subscription:Pay","link":"<a href=\"Subscription_Pay.html\">Subscription:Pay</a>"},{"title":"Subscription:Renew","link":"<a href=\"Subscription_Renew.html\">Subscription:Renew</a>"},{"title":"Config","link":"<a href=\"Config.html\">Config</a>"},{"title":"Api","link":"<a href=\"Config.Api.html\">Api</a>"},{"title":"Product","link":"<a href=\"Product.html\">Product</a>"},{"title":"ProductDetails","link":"<a href=\"ProductDetails.html\">ProductDetails</a>"},{"title":"Products","link":"<a href=\"Products.html\">Products</a>"},{"title":"Response","link":"<a href=\"Response.html\">Response</a>"},{"title":"User","link":"<a href=\"User.html\">User</a>"}];
         var options = 
           setupSearch(list, options)
       </script>

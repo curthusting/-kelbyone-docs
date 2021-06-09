@@ -28,7 +28,7 @@
 
 
     <title>
-      Account:Payment_Profiles
+      Content:Search
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Account:Payment_Profiles
+        Content:Search
       </h1>
       
 
@@ -121,7 +121,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Account Payment Profiles View</p></div>
+            <div class="description"><p>Content Search View</p></div>
         
 
         
@@ -197,6 +197,29 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Content type filter</p></td>
+        </tr>
+
+    
     </tbody>
 </table>
 </div>
@@ -235,22 +258,13 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="components_account_views_payment-profiles_payment-profiles.js.html">components/account/views/payment-profiles/payment-profiles.js</a>, <a href="components_account_views_payment-profiles_payment-profiles.js.html#line6">line 6</a>
+                <a href="components_content_views_search_search.js.html">components/content/views/search/search.js</a>, <a href="components_content_views_search_search.js.html#line3">line 3</a>
             </li></ul></dd>
         </div>
     
 
     
 
-    
-        <div class="details-item-container">
-            <dt class="tag-see">See:</dt>
-            <dd class="tag-see">
-                <ul>
-                    <li><p><a href="https://kelbystaging.wpengine.com/checkout-components/?component=account-payment-profiles-view&amp;user=139167&amp;token=6094485c4050b0.49135056">Components Example</a></p></li>
-                </ul>
-            </dd>
-        </div>
     
 
     
@@ -264,13 +278,14 @@
             
     <div class="rel">
     <pre class="prettyprint"><code>koc("loadComponent", {
-  name: "account-payment-profiles-view",
-  el: "#kelbyone-component-view",
-  props: {
-    config: { ... },
-    user: { ... },
-  }
-});</code></pre>
+    name: "scontent-search-view",
+    el: "#kelbyone-component-view",
+    props: {
+      config: { ... },
+      user: { ... },
+      type: ...
+    }
+  });</code></pre>
     
     
     </div>

@@ -85,7 +85,7 @@
   <body>
 
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="4751953" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Account_Payment_Profiles.html">Account:Payment_Profiles</a></li><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="763393" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="478754" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Account_Payment_Profiles.html">Account:Payment_Profiles</a></li><li class="accordion-list" id=""><a href="Auth_Login-Register.html">Auth:Login-Register</a></li><li class="accordion-list" id=""><a href="Content_Search.html">Content:Search</a></li><li class="accordion-list" id=""><a href="Purchase_Bundle.html">Purchase:Bundle</a></li><li class="accordion-list" id=""><a href="Purchase_Course.html">Purchase:Course</a></li><li class="accordion-list" id=""><a href="Purchase_Cyber.html">Purchase:Cyber</a></li><li class="accordion-list" id=""><a href="Purchase_Gift.html">Purchase:Gift</a></li><li class="accordion-list" id=""><a href="Purchase_Redeem.html">Purchase:Redeem</a></li><li class="accordion-list" id=""><a href="Purchase_Subscription.html">Purchase:Subscription</a></li><li class="accordion-list" id=""><a href="Subscription_Change-Plan.html">Subscription:Change-Plan</a></li><li class="accordion-list" id=""><a href="Subscription_Migrate.html">Subscription:Migrate</a></li><li class="accordion-list" id=""><a href="Subscription_Pay.html">Subscription:Pay</a></li><li class="accordion-list" id=""><a href="Subscription_Renew.html">Subscription:Renew</a></li></ul> </div><div class="accordion collapsed" id="9024457" > <h3 class="accordion-heading">Interfaces<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Config.html">Config</a></li><li class="accordion-list" id=""><a href="Config.Api.html">Api</a></li><li class="accordion-list" id=""><a href="Product.html">Product</a></li><li class="accordion-list" id=""><a href="ProductDetails.html">ProductDetails</a></li><li class="accordion-list" id=""><a href="Products.html">Products</a></li><li class="accordion-list" id=""><a href="Response.html">Response</a></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div></div>
       
 
     </nav>
@@ -111,7 +111,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { reactive, inject, ref, computed } from 'vue';
+            <pre class="prettyprint source linenums"><code>import { reactive, inject, ref, computed, provide } from 'vue';
 
 import AuthLoginRegisterComponent from '@/components/auth/blocks/login-register/login-register.vue';
 import PaymentBillingDetailsComponent from '@/components/payment/blocks/billing-details/billing-details.vue';
@@ -158,6 +158,7 @@ export default {
   setup() {
     let config = inject('config');
     config = { ...config, ...props.config };
+    provide('config', config);
 
     const authProvider = inject('authProvider');
     const customerProvider = inject('customerProvider');
@@ -166,6 +167,7 @@ export default {
     const state = reactive({
       expanded: ref(1),
       showNotification: ref(false),
+      confirmDelete: ref(null),
       notification: ref(null),
       user: computed(() => authProvider().getUser),
       isLoadingUser: computed(() => authProvider().isLoading),
@@ -182,7 +184,7 @@ export default {
     });
 
     const handleResponse = async (response) => {
-      if (response.status === 'error') {
+      if (response.status === 'error' || response.success === false) {
         state.showNotification = true;
         state.notification = response.data.message || response.data.data.message || response.data.data;
       } else {
@@ -197,7 +199,7 @@ export default {
       await customerProvider().loadCustomer(customer, token, config);
 
       state.showNotification = true;
-      state.notification = 'Updating Customer...';
+      state.notification = 'Loading Payment Methods...';
       let response = await subscriptionProvider().updateCustomer(customer, token, config);
 
       if (customerProvider().hasCustomerMembership) {
@@ -267,29 +269,70 @@ export default {
       await handleResponse(response);
     }
 
-    const removePayment = async (details) => {
+    const removePayment = async (profile) => {
       state.showNotification = true;
       state.notification = 'Removing Payment Method...';
 
-      const response = await customerProvider().removePayment(details.id, state.user.token, config);
+      if (customerProvider().hasCustomerMembership) {
+        const membership = await customerProvider().getCustomerMembership;
+        const response = await subscriptionProvider().removeProfile(membership, profile.id, config);
+        await handleResponse(response);
+      } else {
+        const response = await customerProvider().removePayment(profile.id, state.user.token, config);
+        await handleResponse(response);
+      }
 
+      const { id, token } = state.user;
+      let response = await authProvider().loadUser(id, token, config);
       await handleResponse(response);
-    }
 
-    const updatePayment = async (details) => {
-      state.showNotification = true;
-      state.notification = 'Updating Payment Method...';
-
-      if (state.hasMembership) {
-        const response = await subscriptionProvider().setProfile(state.getMembership, details.id, config);
-
+      if ('success' === response.status) {
+        const { data } = response.data;
+        response = await loadCustomer(data.customer.id, data.token)
         await handleResponse(response);
       }
     }
 
+    const activatePayment = async (details) => {
+      state.showNotification = true;
+      state.notification = 'Updating Payment Method...';
+
+      if (state.hasMembership) {
+        let response = await subscriptionProvider().setProfile(state.getMembership, details.id, config);
+
+        await handleResponse(response);
+
+        if (state.user) {
+          state.showNotification = true;
+          state.notification = 'Updating User...';
+          const { id, token } = state.user;
+          response = await authProvider().loadUser(id, token, config);
+          await handleResponse(response);
+
+          if ('success' === response.status) {
+            state.showNotification = true;
+            state.notification = 'Updating Customer...';
+            const { data } = response.data;
+            await customerProvider().loadCustomer(data.customer.id, data.token, config);
+            await handleResponse(response);
+          }
+
+        }
+      }
+    }
+
+    const updatePayment = async (details) => {
+      state.showNotification = true;
+      state.notification = 'Updating Payment Profile...';
+
+      const response = await customerProvider().updatePayment(details, state.user.token, config);
+
+      await handleResponse(response);
+    }
+
     const clearNotification = async () => state.showNotification = false;
 
-    return { login, register, createPayment, updatePayment, removePayment, clearNotification, state };
+    return { login, register, createPayment, activatePayment, updatePayment, removePayment, clearNotification, state };
   },
 };</code></pre>
         </article>
@@ -316,7 +359,7 @@ export default {
       <script src="scripts/search.js"></script>
       <script src="scripts/third-party/fuse.js"></script>
       <script>
-        var list = [{"title":"Account:Payment_Profiles","link":"<a href=\"Account_Payment_Profiles.html\">Account:Payment_Profiles</a>"},{"title":"Auth:Login-Register","link":"<a href=\"Auth_Login-Register.html\">Auth:Login-Register</a>"},{"title":"Purchase:Bundle","link":"<a href=\"Purchase_Bundle.html\">Purchase:Bundle</a>"},{"title":"Purchase:Course","link":"<a href=\"Purchase_Course.html\">Purchase:Course</a>"},{"title":"Purchase:Cyber","link":"<a href=\"Purchase_Cyber.html\">Purchase:Cyber</a>"},{"title":"Purchase:Gift","link":"<a href=\"Purchase_Gift.html\">Purchase:Gift</a>"},{"title":"Purchase:Redeem","link":"<a href=\"Purchase_Redeem.html\">Purchase:Redeem</a>"},{"title":"Purchase:Subscription","link":"<a href=\"Purchase_Subscription.html\">Purchase:Subscription</a>"},{"title":"Subscription:Change-Plan","link":"<a href=\"Subscription_Change-Plan.html\">Subscription:Change-Plan</a>"},{"title":"Subscription:Migrate","link":"<a href=\"Subscription_Migrate.html\">Subscription:Migrate</a>"},{"title":"Subscription:Pay","link":"<a href=\"Subscription_Pay.html\">Subscription:Pay</a>"},{"title":"Subscription:Renew","link":"<a href=\"Subscription_Renew.html\">Subscription:Renew</a>"},{"title":"Config","link":"<a href=\"Config.html\">Config</a>"},{"title":"Api","link":"<a href=\"Config.Api.html\">Api</a>"},{"title":"Product","link":"<a href=\"Product.html\">Product</a>"},{"title":"ProductDetails","link":"<a href=\"ProductDetails.html\">ProductDetails</a>"},{"title":"Products","link":"<a href=\"Products.html\">Products</a>"},{"title":"Response","link":"<a href=\"Response.html\">Response</a>"},{"title":"User","link":"<a href=\"User.html\">User</a>"}];
+        var list = [{"title":"Account:Payment_Profiles","link":"<a href=\"Account_Payment_Profiles.html\">Account:Payment_Profiles</a>"},{"title":"Auth:Login-Register","link":"<a href=\"Auth_Login-Register.html\">Auth:Login-Register</a>"},{"title":"Content:Search","link":"<a href=\"Content_Search.html\">Content:Search</a>"},{"title":"Purchase:Bundle","link":"<a href=\"Purchase_Bundle.html\">Purchase:Bundle</a>"},{"title":"Purchase:Course","link":"<a href=\"Purchase_Course.html\">Purchase:Course</a>"},{"title":"Purchase:Cyber","link":"<a href=\"Purchase_Cyber.html\">Purchase:Cyber</a>"},{"title":"Purchase:Gift","link":"<a href=\"Purchase_Gift.html\">Purchase:Gift</a>"},{"title":"Purchase:Redeem","link":"<a href=\"Purchase_Redeem.html\">Purchase:Redeem</a>"},{"title":"Purchase:Subscription","link":"<a href=\"Purchase_Subscription.html\">Purchase:Subscription</a>"},{"title":"Subscription:Change-Plan","link":"<a href=\"Subscription_Change-Plan.html\">Subscription:Change-Plan</a>"},{"title":"Subscription:Migrate","link":"<a href=\"Subscription_Migrate.html\">Subscription:Migrate</a>"},{"title":"Subscription:Pay","link":"<a href=\"Subscription_Pay.html\">Subscription:Pay</a>"},{"title":"Subscription:Renew","link":"<a href=\"Subscription_Renew.html\">Subscription:Renew</a>"},{"title":"Config","link":"<a href=\"Config.html\">Config</a>"},{"title":"Api","link":"<a href=\"Config.Api.html\">Api</a>"},{"title":"Product","link":"<a href=\"Product.html\">Product</a>"},{"title":"ProductDetails","link":"<a href=\"ProductDetails.html\">ProductDetails</a>"},{"title":"Products","link":"<a href=\"Products.html\">Products</a>"},{"title":"Response","link":"<a href=\"Response.html\">Response</a>"},{"title":"User","link":"<a href=\"User.html\">User</a>"}];
         var options = 
           setupSearch(list, options)
       </script>

@@ -28,7 +28,7 @@
 
 
     <title>
-      components/subscription/views/pay/pay.js
+      components/purchase/views/event/event.js
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        components/subscription/views/pay/pay.js
+        components/purchase/views/event/event.js
       </h1>
       
 
@@ -117,32 +117,33 @@ import AuthLoginRegisterComponent from '@/components/auth/blocks/login-register/
 import PurchaseProductSelectComponent from '@/components/purchase/blocks/product-select/product-select.vue';
 import PaymentBillingDetailsComponent from '@/components/payment/blocks/billing-details/billing-details.vue';
 import PurchaseSummaryComponent from '@/components/purchase/blocks/summary/summary.vue';
-import PurchaseNextPaymentComponent from '@/components/purchase/blocks/next-payment/next-payment.vue';
+import PurchaseCouponComponent from '@/components/purchase/blocks/coupon/coupon.vue';
 
 /**
- * Subscription Pay View
- * @module Subscription:Pay
- *
+ * Purchase Event View
+ * @module Purchase:Event
+ * 
  * @prop { Config } config Component configuration
  * @prop { Products } products Product details
- * @prop { User } user Authenticated user details
- *
- *
+ * @prop { User } [user] Authenticated user details
+ * @prop { String } [coupon] Promotion code
+ * 
  * @example
-  koc("loadComponent", {
-    name: "subscription-pay-view",
-    el: "#kelbyone-component-view",
-    props: {
-      config: { ... },
-      products: { options: [{ ... }], selected: ... },
-      user: { ... },
-    }
-  });
+koc("loadComponent", {
+  name: "purchase-event-view",
+  el: "#kelbyone-component-view",
+  props: {
+    config: { ... },
+    products: { options: [{ ... }], selected: ... },
+    user: { ... },
+    coupon: ...,
+  }
+});
  *
  */
 
 export default {
-  name: 'SubscriptionPayView',
+  name: 'PurchaseEventView',
   props: {
     config: {
       type: Object,
@@ -164,8 +165,8 @@ export default {
     AuthLoginRegisterComponent,
     PurchaseProductSelectComponent,
     PaymentBillingDetailsComponent,
+    PurchaseCouponComponent,
     PurchaseSummaryComponent,
-    PurchaseNextPaymentComponent,
   },
   setup() {
     let config = inject('config');
@@ -179,7 +180,6 @@ export default {
     const state = reactive({
       expanded: ref(1),
       showNotification: ref(false),
-      confirmDelete: ref(null),
       notification: ref(null),
       terms: ref(false),
       user: computed(() => authProvider().getUser),
@@ -205,7 +205,7 @@ export default {
     }
 
     const missingFields = () => {
-      if (!state.selected) return 'Please select the plan you would like to purchase!'
+      if (!state.selected) return 'Please select the event you would like to purchase!'
       if (!state.user) return 'Please login or signup to continue!'
       if (!state.payment) return 'Please select the payment method you would like to use!'
       if (!state.terms) return 'Please read and accept the terms &amp; conditions!'
@@ -236,6 +236,19 @@ export default {
 
     if (props.products.selected) {
       updateProduct(props.products.selected, false);
+    }
+
+    const updateCoupon = async (code) => {
+      state.showNotification = true;
+      state.notification = 'Validating Promotion Code...';
+
+      const response = await subscriptionProvider().updateCoupon(code, config);
+
+      await handleResponse(response);
+    }
+
+    if (props.coupon) {
+      updateCoupon(props.coupon);
     }
 
     const loadCustomer = async (customer, token) => {
@@ -375,7 +388,7 @@ export default {
       if (state.selected) return state.expanded = 2;
     }
 
-    return { login, register, updateProduct, createPayment, activatePayment, updatePayment, removePayment, purchase, clearNotification, toggleExpanded, isCompleted, missingFields, next, state };
+    return { login, register, updateProduct, updateCoupon, createPayment, activatePayment, updatePayment, removePayment, purchase, clearNotification, toggleExpanded, isCompleted, missingFields, next, state };
   },
 };</code></pre>
         </article>

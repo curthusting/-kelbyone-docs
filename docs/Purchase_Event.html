@@ -28,7 +28,7 @@
 
 
     <title>
-      services/_interfaces.js
+      Purchase:Event
     </title>
 
     <!--[if lt IE 9]>
@@ -100,7 +100,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        services/_interfaces.js
+        Purchase:Event
       </h1>
       
 
@@ -108,110 +108,266 @@
 
 
 
+
+<section>
+
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Represents the User Object Structure.
- *
- * @interface User
- * @property { string } id
- * @property { string } token
- */
+</header>
 
-/**
- * Represents the Products Object Structure.
- *
- * @interface Products
- * @property { Array&lt;Product> } options
- * @property { string } selected
- */
 
-/**
- * Represents the Product Object Structure.
- *
- * @interface Product
- * @property { ProductDetails } product
- * @property { string } title
- * @property { string } [description]
- * @property { string } [duration]
- * @property { string } [cta]
- * @property { string } [recurring]
- *
- * @example
- *
-// Memberships
-  {
-    title: 'Pro',
-    description: 'Monthly',
-    product: {
-      handle: 'korm-pro-monthly',
-      price: '1999',
-    },
-    duration: 'month',
-    cta: null,
-    recurring: 'recurring / cancel anytime',
-  },
-  {
-    title: 'Pro',
-    description: 'Annual',
-    product: {
-      handle: 'korm-pro-annual',
-      price: '19900',
-    },
-    duration: 'year',
-    cta: 'save $40',
-    recurring: 'recurring / cancel anytime',
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Purchase Event View</p></div>
+        
+
+        
+
+
+
+    <h5 class="subsection-title">Properties</h5>
+
+    
+<div class="allow-overflow">
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Config.html">Config</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Component configuration</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>products</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Products.html">Products</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Product details</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="User.html">User</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Authenticated user details</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>coupon</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Promotion code</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="components_purchase_views_event_event.js.html">components/purchase/views/event/event.js</a>, <a href="components_purchase_views_event_event.js.html#line9">line 9</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+        
+            <h3>Example</h3>
+            
+    <div class="rel">
+    <pre class="prettyprint"><code>koc("loadComponent", {
+  name: "purchase-event-view",
+  el: "#kelbyone-component-view",
+  props: {
+    config: { ... },
+    products: { options: [{ ... }], selected: ... },
+    user: { ... },
+    coupon: ...,
   }
+});</code></pre>
+    
+    
+    </div>
 
-// Single Course
-  {
-    title: 'Acrobat 8 Professional for Graphic Designers',
-    description: 'by Terry White',
-    product: {
-      handle: 'pc-8405',
-      price: '2900'
-    },
-    duration: 'lifetime',
-    cta: 'Unlimited Lifetime Access',
-    recurring: null,
-  }
- *
- */
+        
+    
+    </div>
 
-/**
- * Represents the Product Details Object Structure.
- *
- * @interface ProductDetails
- * @property { string } handle
- * @property { string } price
- */
+    
 
-/**
- * Represents the Response Object Structure.
- *
- * @interface Response
- * @property { string } status
- * @property { object } data
- */
+    
 
-/**
- * Represents the Config Object Structure.
- *
- * @interface Config
- * @property { Config.Api } api
- * @property { Boolean } debug
- */
+    
 
-/**
- * Represents the Config Object Structure.
- *
- * @interface Config.Api
- * @property { string } uri
- * @property { string } version
- */</code></pre>
-        </article>
-    </section>
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
